@@ -1,3 +1,6 @@
+# homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # locale setting
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
