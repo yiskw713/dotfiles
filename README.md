@@ -5,6 +5,7 @@
 ```sh
 cd $HOME
 git clone https://github.com/yiskw713/dotfiles
+cd dotfiles
 sh install.sh
 ```
 
