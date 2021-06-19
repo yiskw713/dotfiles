@@ -30,11 +30,7 @@ brew "wget"
 cask "discord"
 cask "docker"
 cask "font-hack-nerd-font"
-cask "google-chrome"
 cask "karabiner-elements"
 cask "slack"
-cask "spectacle"
 cask "visual-studio-code"
 cask "zoom"
-mas "LINE", id: 539883307
-mas "RunCat", id: 1429033973

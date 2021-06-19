@@ -4,7 +4,7 @@ THIS_DIR=$(cd $(dirname $0); pwd)
 
 cd $HOME
 
-for file in .zshrc .tmux.conf
+for file in .zshrc .tmux.conf .vimrc .gvimrc
 do
 	[ ! -e $file ] && ln -s dotfiles/$file .
 done
@@ -48,6 +48,8 @@ if [ $(uname) = Darwin ]; then
 fi
 
 cd $THIS_DIR
+
+exec $SHELL -l
 
 # install rbenv pyenv nodenv
 anyenv install rbenv
