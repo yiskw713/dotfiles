@@ -38,10 +38,10 @@ if [ $(uname) = Darwin ]; then
 
     # パッケージのアップデート
     brew upgrade
-    brew cask upgrade
+    brew upgrade --cask
 
     # Brewfileの中身をインストール
-    brew bundle
+    brew bundle --file $THIS_DIR/Brewfile
 
     brew cleanup
     brew doctor
