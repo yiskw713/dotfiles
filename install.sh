@@ -11,7 +11,7 @@ done
 
 # starship config
 mkdir -p $HOME/.config
-ln -s dotfiles/starship.toml $HOME/.config
+ln -s $THIS_DIR/starship.toml $HOME/.config/starship.toml
 
 # zinit install
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"

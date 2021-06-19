@@ -33,9 +33,10 @@ eval "$(starship init zsh)"
 
 # SYMBOL=""
 
+zinit load "mafredri/zsh-async"
+
 # 構文のハイライト(https://github.com/zsh-users/zsh-syntax-highlighting)
 zinit load "zsh-users/zsh-syntax-highlighting"
-# zinit load "zsh-users/zsh-syntax-highlighting", defer:2
 
 ### history 設定
 HISTFILE=~/.zsh_historyx
@@ -46,7 +47,9 @@ autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "\e[A" history-beginning-search-backward-end
+bindkey "^[[A" history-beginning-search-backward-end
 bindkey "\e[B" history-beginning-search-forward-end
+bindkey "^[[B" history-beginning-search-forward-end
 
 # 補完候補のメニュー選択で、矢印キーの代わりにhjklで移動出来るようにする。
 zmodload zsh/complist
@@ -104,7 +107,7 @@ zinit load "peterhurford/git-aliases.zsh"
 # ヒストリの補完を強化する
 zinit load "zsh-users/zsh-history-substring-search"
 
-# 補完候補が複数ある時に、一覧表示
+#] 補完候補が複数ある時に、一覧表示
 setopt auto_list
 # 補完キー（Tab, Ctrl+I) を連打するだけで順に補完候補を自動で補完
 setopt auto_menu
