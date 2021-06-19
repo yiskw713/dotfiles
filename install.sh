@@ -18,8 +18,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/i
 
 if [ $(uname) = Darwin ]; then 
     # mac
-	mkdir ~/Pictures/ScreenShots/
-	defaults write com.apple.screencapture location ~/Pictures/
+    mkdir ~/Pictures/ScreenShots/
+    defaults write com.apple.screencapture location ~/Pictures/
     # ファインダーにホームディレクトリを表示
     chflags nohidden ~/
     # 隠しファイルを表示
@@ -28,8 +28,8 @@ if [ $(uname) = Darwin ]; then
     defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 
     xcode-select --install
-	echo "installing Homebrew ..."
-	which brew >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    echo "installing Homebrew ..."
+    which brew >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
     which brew >/dev/null 2>&1 && brew doctor
 
