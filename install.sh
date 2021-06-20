@@ -44,7 +44,9 @@ if [ $(uname) = Darwin ]; then
     brew bundle --file $THIS_DIR/Brewfile
 
     brew cleanup
-    brew doctor
+
+    # for vscode
+    ln -s $THIS_DIR/settings.json "${HOME}/Library/Application Support/Code/User/settings.json"
 fi
 
 cd $THIS_DIR
