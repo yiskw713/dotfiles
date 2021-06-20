@@ -6,12 +6,12 @@ cd $HOME
 
 for file in .zshrc .tmux.conf .vimrc
 do
-    [ ! -e $file ] && ln -s dotfiles/$file .
+    [ ! -e $file ] && ln -sf dotfiles/$file .
 done
 
 # starship config
 mkdir -p $HOME/.config
-ln -s $THIS_DIR/starship.toml $HOME/.config/starship.toml
+ln -sf $THIS_DIR/starship.toml $HOME/.config/starship.toml
 
 # zinit install
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
@@ -46,7 +46,7 @@ if [ $(uname) = Darwin ]; then
     brew cleanup
 
     # for vscode
-    ln -s $THIS_DIR/settings.json "${HOME}/Library/Application Support/Code/User/settings.json"
+    ln -sf $THIS_DIR/settings.json "${HOME}/Library/Application Support/Code/User/settings.json"
 fi
 
 # for docker completion
