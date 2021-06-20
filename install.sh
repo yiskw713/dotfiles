@@ -4,7 +4,7 @@ THIS_DIR=$(cd $(dirname $0); pwd)
 
 cd $HOME
 
-for file in .zshrc .tmux.conf .vimrc .gvimrc
+for file in .zshrc .tmux.conf .vimrc
 do
 	[ ! -e $file ] && ln -s dotfiles/$file .
 done
@@ -69,3 +69,14 @@ cd fonts
 ./install.sh
 cd ..
 rm -rf fonts
+
+# install lightline.vim
+git clone https://github.com/itchyny/lightline.vim ~/.vim/pack/plugins/start/lightline
+
+# install Vundle and VSCode colortheme for vim
+mkdir ~/.vim
+mkdir ~/.vim/bundle
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+# install vim plugin
+vim +PluginInstall +qall

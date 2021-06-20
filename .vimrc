@@ -1,8 +1,29 @@
-" setting
+" Vundleでプラグインをインストールするための設定
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" Vundleのプラグイン
+Plugin 'VundleVim/Vundle.vim'
+" vim-code-darkのプラグイン
+Plugin 'tomasiser/vim-code-dark'
+call vundle#end()
+
+"----------------------------------------
+" General
+"----------------------------------------
 "文字コードをUFT-8に設定
 set fenc=utf-8
-" バックアップファイルを作らない
+" ファイルを上書きする前にバックアップを作ることを無効化
+set nowritebackup
+" ファイルを上書きする前にバックアップを作ることを無効化
 set nobackup
+" vim の矩形選択で文字が無くても右へ進める
+set virtualedit=block
+" 挿入モードでバックスペースで削除できるようにする
+set backspace=indent,eol,start
+" 全角文字専用の設定
+set ambiwidth=double
+" wildmenuオプションを有効(vimバーからファイルを選択できる)
+set wildmenu
 " スワップファイルを作らない
 set noswapfile
 " 編集中のファイルが変更されたら自動で読み直す
@@ -11,8 +32,23 @@ set autoread
 set hidden
 " 入力中のコマンドをステータスに表示する
 set showcmd
+" 検索にマッチした行以外を折りたたむ(フォールドする)機能
+set nofoldenable
+" yでコピーした時にクリップボードに入る
+set guioptions+=a
+" ヤンクでクリップボードにコピー
+set clipboard=unnamed,autoselect
+"マウス操作の有効化 & ホイール操作の有効化
+set mouse=a
+set ttymouse=xterm2
 
-" 見た目系
+"----------------------------------------
+" 表示
+"----------------------------------------
+" カラースキーム
+colorscheme codedark
+" ダーク系のカラースキームを使う
+set background=dark
 " 行番号を表示
 set number
 " 現在の行を強調表示
@@ -29,15 +65,32 @@ set visualbell
 set showmatch
 " ステータスラインを常に表示
 set laststatus=2
+" メッセージ表示欄を2行確保
+set cmdheight=2
+let g:lightline = { 'colorscheme': 'codedark' }
 " コマンドラインの補完
 set wildmode=list:longest
+" 省略されずに表示
+set display=lastline
 " 折り返し時に表示行単位での移動できるようにする
 nnoremap j gj
 nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
+" 対応する括弧やブレースを表示
+set showmatch matchtime=1
+" 行末のスペースを可視化
+set listchars=tab:^\ ,trail:~
+" コマンドラインの履歴を10000件保存する
+set history=10000
+" メニューバーを非表示にする
+set guioptions-=m
+" タイトルを表示
+set title
 
+"----------------------------------------
 " Tab系
+"----------------------------------------
 " 不可視文字を可視化(タブが「▸-」と表示される)
 set list listchars=tab:\▸\-
 " Tab文字を半角スペースにする
@@ -46,9 +99,12 @@ set expandtab
 set tabstop=4
 " 行頭でのTab文字の表示幅
 set shiftwidth=4
+" ファイル内にあるタブ文字の表示幅
+set tabstop=4
 
-
+"----------------------------------------
 " 検索系
+"----------------------------------------
 " 検索文字列が小文字の場合は大文字小文字を区別なく検索する
 set ignorecase
 " 検索文字列に大文字が含まれている場合は区別して検索する
@@ -62,6 +118,22 @@ set hlsearch
 " ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
-" enable delete key
-set backspace=indent,eol,start
+" 編集箇所のカーソルを記憶
+if has("autocmd")
+  augroup redhat
+    " In text files, always limit the width of text to 78 characters
+    autocmd BufRead *.txt set tw=78
+    " When editing a file, always jump to the last cursor position
+    autocmd BufReadPost *
+    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+    \   exe "normal! g'\"" |
+    \ endif
+  augroup END
+endif
 
+" undoの永続化(一度ファイルを閉じてもundoできる)
+if has('persistent_undo')
+  let undo_path = expand('~/.vim/undo')
+  exe 'set undodir=' .. undo_path
+  set undofile
+endif
