@@ -6,7 +6,7 @@ cd $HOME
 
 for file in .zshrc .tmux.conf .vimrc
 do
-	[ ! -e $file ] && ln -s dotfiles/$file .
+    [ ! -e $file ] && ln -s dotfiles/$file .
 done
 
 # starship config
@@ -48,6 +48,11 @@ if [ $(uname) = Darwin ]; then
     # for vscode
     ln -s $THIS_DIR/settings.json "${HOME}/Library/Application Support/Code/User/settings.json"
 fi
+
+# for docker completion
+mkdir -p ~/.zsh/completion
+curl -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/zsh/_docker-compose \
+     -o ~/.zsh/completion/_docker-compose
 
 cd $THIS_DIR
 

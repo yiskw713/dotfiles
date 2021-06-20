@@ -165,3 +165,8 @@ do
 done
 
 export PATH="$HOME/.poetry/bin:$PATH"
+
+# for docker completion
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
+
