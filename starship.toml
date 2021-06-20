@@ -29,7 +29,7 @@ format = "via [🐋 $context](blue bold)"
 pyenv_version_name = true
 
 [rust]
-format = "via [⚙️ $version](red bold)"
+disabled = false
 
 [username]
 disabled = true
