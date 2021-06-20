@@ -87,6 +87,8 @@ set history=10000
 set guioptions-=m
 " タイトルを表示
 set title
+" ツールバーを非表示にする
+set guioptions-=T
 
 "----------------------------------------
 " Tab系
