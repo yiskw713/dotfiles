@@ -51,7 +51,7 @@ fi
 
 cd $THIS_DIR
 
-exec $SHELL -l
+source ~/.zshrc
 
 # install rbenv pyenv nodenv
 anyenv install rbenv
