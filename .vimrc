@@ -139,3 +139,4 @@ if has('persistent_undo')
   exe 'set undodir=' .. undo_path
   set undofile
 endif
+
