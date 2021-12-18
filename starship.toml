@@ -28,7 +28,7 @@ truncation_symbol = "…/"
 format = "via [🐋 $context](blue bold)"
 
 [python]
-pyenv_version_name = true
+pyenv_version_name = false
 
 [rust]
 disabled = false

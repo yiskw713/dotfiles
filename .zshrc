@@ -170,3 +170,5 @@ export PATH="$HOME/.poetry/bin:$PATH"
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
 
+eval "$(pyenv virtualenv-init -)"
+

@@ -1,7 +1,7 @@
 {
     "workbench.startupEditor": "newUntitledFile",
     // pythonの環境設定
-    "python.pythonPath": "venv/bin/python",
+    "python.pythonPath": "/usr/bin/python3",
     "files.watcherExclude": {
         "**/venv/**": true
     },
@@ -27,7 +27,8 @@
     "[python]": {
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
-            "source.organizeImports": true
+            // todo
+            "source.organizeImports": false
         }
     },
     "editor.formatOnPaste": true,
@@ -117,12 +118,9 @@
             "background": "red"
         }
     },
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
     "editor.formatOnSave": true,
     "python.languageServer": "Pylance",
     "todo-tree.general.tags": [
@@ -137,10 +135,15 @@
     "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
     "workbench.iconTheme": "material-icon-theme",
     "footsteps.doHighlightChanges": true,
-    "window.zoomLevel": -1,
     "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace, \"Roboto Mono for Powerline\"",
     "workbench.colorCustomizations": {
         "editor.lineHighlightBackground": "#272626",
         "editorRuler.foreground": "#ff4081",
     },
+    "python.defaultInterpreterPath": "/usr/bin/python3",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "window.zoomLevel": -1,
 }
