@@ -31,7 +31,8 @@ autoload -Uz _zinit
 # starship
 eval "$(starship init zsh)"
 
-# SYMBOL=""
+# starshipでpyenvの環境が重複してしまうのを解消する
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1 
 
 zinit load "mafredri/zsh-async"
 
