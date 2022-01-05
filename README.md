@@ -12,3 +12,4 @@ sh install.sh
 ## Font
 
 use `"Roboto Mono for Powerline"` for terminal and vscode.
+

@@ -1,11 +1,10 @@
-" Vundleでプラグインをインストールするための設定
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" Vundleのプラグイン
-Plugin 'VundleVim/Vundle.vim'
-" vim-code-darkのプラグイン
-Plugin 'tomasiser/vim-code-dark'
-call vundle#end()
+call plug#begin()
+Plug 'tomasiser/vim-code-dark'
+Plug 'lambdalisue/fern.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+call plug#end()
 
 "----------------------------------------
 " General
@@ -139,4 +138,5 @@ if has('persistent_undo')
   exe 'set undodir=' .. undo_path
   set undofile
 endif
+
 
