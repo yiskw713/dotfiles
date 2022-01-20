@@ -9,7 +9,7 @@ export LC_CTYPE="en_US.UTF-8"
 # cdls
 cdls ()
 {
-    \cd "$@" && ls -a
+    \cd "$@" && exa -a
 }
 alias cd="cdls"
 alias ls="ls -a"
@@ -24,8 +24,13 @@ alias d='docker'
 alias dc='docker-compose'
 alias dimg='docker image'
 alias dcnt='docker container'
+# git
 alias gcm='git commit -m'
 alias g="git"
+# rust
+alias c="cargo"
+# python
+alias p="python"
 
 # zinit
 source ~/.zinit/bin/zinit.zsh
@@ -202,6 +207,9 @@ export FZF_CTRL_R_OPTS="
     --preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'
 "
 
+# zoxide
+eval "$(zoxide init zsh)"
+
 # fgc (git checkout) - checkout git branch including remote branches
 # ref: https://qiita.com/kamykn/items/aa9920f07487559c0c7e
 fgc() {
@@ -279,8 +287,10 @@ fzf-z-search() {
     fi
 }
 
-zle -N fzf-z-search
-bindkey '^z' fzf-z-search
+# zle -N fzf-z-search
+# bindkey '^z' fzf-z-search
+zle -N zi
+bindkey '^z' zi
 
 # プロセスをkill
 fkill() {
@@ -331,3 +341,12 @@ fdimgrm() {
   cid=$(docker image ls -a | sed 1d | fzf -m -q "$1" | awk '{print $1}')
   [ -n "$cid" ] && echo $cid | xargs docker image rm -f
 }
+
+# https://github.com/nvbn/thefuck
+eval $(thefuck --alias)
+
+# tre: https://github.com/dduan/tre
+tre() { command tre "$@" -e vim && source "/tmp/tre_aliases_$USER" 2>/dev/null; }
+
+
+
