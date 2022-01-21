@@ -137,7 +137,7 @@
     "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
     "workbench.iconTheme": "material-icon-theme",
     "footsteps.doHighlightChanges": true,
-    "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace, \"Roboto Mono for Powerline\"",
+    "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace, \"Roboto Mono for Powerline\", \"HackGen35Nerd Console\"",
     "workbench.colorCustomizations": {
         "editor.lineHighlightBackground": "#272626",
         "editorRuler.foreground": "#ff4081",

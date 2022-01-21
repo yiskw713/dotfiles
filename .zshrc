@@ -5,11 +5,17 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
-# alias
+# exa: https://github.com/ogham/exa
+alias exa="exa -a --icons --git -h -g"
+
+# s-search: https://github.com/zquestz/s
+alias s="s -p google"
+
+# alias:
 # cdls
 cdls ()
 {
-    \cd "$@" && exa -a
+    \cd "$@" && exa
 }
 alias cd="cdls"
 alias ls="ls -a"
@@ -110,10 +116,6 @@ zinit load "zsh-users/zsh-autosuggestions"
 zinit load "zsh-users/zsh-completions"
 zinit load "chrissicool/zsh-256color"
 
-# git の補完を効かせる
-# 補完＆エイリアスが追加される
-zinit load "peterhurford/git-aliases.zsh"
-
 # ヒストリの補完を強化する
 zinit load "zsh-users/zsh-history-substring-search"
 
@@ -192,7 +194,7 @@ eval "$(pyenv virtualenv-init -)"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!**/.git/*"'
 export FZF_DEFAULT_OPTS="
     --height 40% --reverse --border=sharp --margin=0,1
-    --prompt=' ' --color=light
+    --prompt=' ' --color=light
 "
 # for finding files in current directories
 export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!**/.git/*"'
@@ -209,6 +211,11 @@ export FZF_CTRL_R_OPTS="
 
 # zoxide
 eval "$(zoxide init zsh)"
+zls ()
+{
+    \z "$@" && exa
+}
+alias z=zls
 
 # fgc (git checkout) - checkout git branch including remote branches
 # ref: https://qiita.com/kamykn/items/aa9920f07487559c0c7e
