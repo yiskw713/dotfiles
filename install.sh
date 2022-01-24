@@ -13,6 +13,10 @@ done
 mkdir -p $HOME/.config
 ln -sf $THIS_DIR/starship.toml $HOME/.config/starship.toml
 
+# procs config
+mkdir -p $HOME/.config/procs
+ln -sf $THIS_DIR/procs.toml $HOME/.config/procs/config.toml
+
 # zinit install
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 

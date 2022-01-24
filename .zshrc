@@ -5,18 +5,40 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
+# alias settings
+# z: https://github.com/ajeetdsouza/zoxide
+if [[ $(command -v z ) ]]; then
+    alias cd="z"
+fi
+
 # exa: https://github.com/ogham/exa
-alias exa="exa -a --icons --git -h -g"
+if [[ $(command -v exa) ]]; then
+    alias exa="exa -a --icons --git -h -g"
+    alias ls=exa
+
+    # cdls
+    cdls ()
+    {
+        \cd "$@" && exa
+    }
+else
+    alias ls="ls -a"
+    cdls ()
+    {
+        \cd "$@" && ls
+    }
+fi
 
 # s-search: https://github.com/zquestz/s
-alias s="s -p google"
+if [[ $(command -v s) ]]; then
+    alias s="s -p google"
+fi
 
-# alias:
-# cdls
-cdls ()
-{
-    \cd "$@" && exa
-}
+# tre: https://github.com/dduan/tre
+tre() { command tre "$@" -e vim && source "/tmp/tre_aliases_$USER" 2>/dev/null; }
+alias tree="tre"
+
+# other alias
 alias cd="cdls"
 alias ls="ls -a"
 alias reload='exec $SHELL -l'
@@ -351,9 +373,4 @@ fdimgrm() {
 
 # https://github.com/nvbn/thefuck
 eval $(thefuck --alias)
-
-# tre: https://github.com/dduan/tre
-tre() { command tre "$@" -e vim && source "/tmp/tre_aliases_$USER" 2>/dev/null; }
-
-
 
