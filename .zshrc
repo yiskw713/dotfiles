@@ -6,10 +6,6 @@ export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
 # alias settings
-# z: https://github.com/ajeetdsouza/zoxide
-if [[ $(command -v z ) ]]; then
-    alias cd="z"
-fi
 
 # exa: https://github.com/ogham/exa
 if [[ $(command -v exa) ]]; then
