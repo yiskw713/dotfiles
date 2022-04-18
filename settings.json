@@ -140,14 +140,13 @@
     "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace, \"Roboto Mono for Powerline\", \"HackGen35Nerd Console\"",
     "workbench.colorCustomizations": {
         "editor.lineHighlightBackground": "#272626",
-        "editorRuler.foreground": "#ff4081",
+        "editorRuler.foreground": "#ff4081"
     },
     "python.defaultInterpreterPath": "/usr/bin/python3",
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
     },
-    "window.zoomLevel": -1,
     // rust
     "[rust]": {
         "editor.defaultFormatter": "rust-lang.rust",
@@ -156,4 +155,7 @@
         "editor.insertSpaces": true,
         "editor.detectIndentation": false,
     },
+    "http.systemCertificates": false,
+    "docwriter.style": "Google",
+    "window.zoomLevel": -1,
 }

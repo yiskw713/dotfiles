@@ -17,6 +17,9 @@ ln -sf $THIS_DIR/starship.toml $HOME/.config/starship.toml
 mkdir -p $HOME/.config/procs
 ln -sf $THIS_DIR/procs.toml $HOME/.config/procs/config.toml
 
+# setting for fzf
+ln -sf $THIS_DIR/.fzf.zsh $HOME/.fzf.zsh
+
 # zinit install
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
