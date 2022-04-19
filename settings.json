@@ -27,8 +27,7 @@
     "[python]": {
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
-            // todo
-            "source.organizeImports": false
+            "source.organizeImports": true
         },
         "editor.formatOnPaste": false,
         "editor.formatOnSaveMode": "file",

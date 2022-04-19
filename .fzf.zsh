@@ -1,15 +1,30 @@
-# fzf
+# # Setup fzf
+# ---------
+if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
+  export PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
+fi
+
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null
+
+# Key bindings
+# ------------
+source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!**/.git/*"'
 export FZF_DEFAULT_OPTS="
     --height 40% --reverse --border=sharp --margin=0,1
     --prompt=' ' --color=light
 "
+
 # for finding files in current directories
-export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!**/.git/*"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="
-    --preview 'bat  --color=always --style=header,grid {}'
+    --preview 'bat --color=always --style=header,grid {}'
     --preview-window=right:60%
 "
+
 
 # Ref: https://wonderwall.hatenablog.com/entry/2017/10/06/063000
 # コマンドが長すぎる時に?を押すと，全コマンドが見れる
@@ -85,13 +100,13 @@ alias fv="fvim"
 # かつていたことのあるディレクトリに移動する
 # https://qiita.com/kamykn/items/aa9920f07487559c0c7e
 fzf-z-search() {
-    local res=$(z | sort -rn | cut -c 12- | fzf)
-    if [ -n "$res" ]; then
-        BUFFER+="cd $res"
-        zle accept-line
-    else
-        return 1
-    fi
+  local res=$(z | sort -rn | cut -c 12- | fzf)
+  if [ -n "$res" ]; then
+      BUFFER+="cd $res"
+      zle accept-line
+  else
+      return 1
+  fi
 }
 
 # zle -N fzf-z-search

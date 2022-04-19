@@ -20,7 +20,7 @@ if [[ $(command -v exa) ]]; then
     # cdls
     cdls ()
     {
-        cd "$@" && exa
+        cd "$@" && exa -a --icons --git -h -g
     }
 else
     alias ls="ls -a"
@@ -219,5 +219,4 @@ eval $(thefuck --alias)
 
 # load settings for fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 
