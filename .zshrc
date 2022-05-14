@@ -46,6 +46,7 @@ alias cat="bat"
 alias cd="cdls"
 alias reload='exec $SHELL -l'
 alias gc="google-chrome"
+alias t="tmux"
 alias v="vim"
 alias vz="vim ~/.zshrc"
 alias vv="vim ~/.vimrc"

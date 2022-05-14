@@ -1,4 +1,7 @@
 {
+    "editor.renderControlCharacters": true, // 制御文字を表示する
+    "files.insertFinalNewline": true, // ファイルの末尾を改行で終わらせる
+    "editor.bracketPairColorization.enabled": true, // 括弧の対応を色付ける
     "workbench.startupEditor": "newUntitledFile",
     // pythonの環境設定
     "python.pythonPath": "/usr/bin/python3",
