@@ -139,4 +139,29 @@ if has('persistent_undo')
   set undofile
 endif
 
+" コピペの際にpasteモードに入らずとも、インデントがずれないようにする
+" https://stackoverflow.com/questions/2514445/turning-off-auto-indent-when-pasting-text-into-vim/38258720#38258720
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
 
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+function! XTermPasteBegin()
+    set pastetoggle=<Esc>[201~
+    set paste
+    return ""
+endfunction
+
+" https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
+" You might have to force true color when using regular vim inside tmux as the
+" colorscheme can appear to be grayscale with "termguicolors" option enabled.
+if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+syntax on
+set termguicolors
+
+" 行の表示を相対的な表示にする
+set relativenumber

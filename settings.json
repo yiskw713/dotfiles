@@ -160,4 +160,7 @@
     "http.systemCertificates": false,
     "docwriter.style": "Google",
     "window.zoomLevel": -1,
+    "zenMode.hideLineNumbers": false,
+    // 行数を相対表示
+    "editor.lineNumbers": "relative",
 }
