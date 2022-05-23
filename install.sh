@@ -59,6 +59,9 @@ if [ $(uname) = Darwin ]; then
 
     # for vscode
     ln -sf $THIS_DIR/settings.json "${HOME}/Library/Application Support/Code/User/settings.json"
+
+    # install gtop. https://github.com/aksakalli/gtop
+    npm install gtop -g
 fi
 
 # for docker completion

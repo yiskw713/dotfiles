@@ -37,9 +37,6 @@ set nofoldenable
 set guioptions+=a
 " ヤンクでクリップボードにコピー
 set clipboard=unnamed,autoselect
-"マウス操作の有効化 & ホイール操作の有効化
-set mouse=a
-set ttymouse=xterm2
 
 "----------------------------------------
 " 表示
