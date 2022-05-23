@@ -12,7 +12,7 @@ fi
 # Key bindings
 key_binding_file="/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
 if [ -e $key_binding_file ]; then
-    source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+    source $key_binding_file
 fi
 
 # -------------
@@ -28,7 +28,7 @@ fi
 # Key bindings
 key_binding_file="/usr/local/opt/fzf/shell/key-bindings.zsh"
 if [ -e $key_binding_file ]; then
-    source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+    source $key_binding_file
 fi
 
 # -------------

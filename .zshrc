@@ -1,5 +1,17 @@
+# Fig pre block. Keep at the top of this file.
+. "$HOME/.fig/shell/zshrc.pre.zsh"
 # homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# for M1 mac
+brew_path="/opt/homebrew/bin/brew"
+if [ -e $brew_path ]; then
+    eval "$($brew_path shellenv)"
+fi
+
+# for intel mac
+brew_path="/usr/local/bin/brew"
+if [ -e $brew_path ]; then
+    eval "$($brew_path shellenv)"
+fi
 
 # locale setting
 export LC_ALL="en_US.UTF-8"
@@ -85,20 +97,20 @@ HISTFILE=~/.zsh_historyx
 HISTSIZE=10000
 SAVEHIST=10000
 
-autoload history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "\e[A" history-beginning-search-backward-end
-bindkey "^[[A" history-beginning-search-backward-end
-bindkey "\e[B" history-beginning-search-forward-end
-bindkey "^[[B" history-beginning-search-forward-end
+# https://superuser.com/questions/585003/searching-through-history-with-up-and-down-arrow-in-zsh
+bindkey '^[[A' up-line-or-search
+bindkey '^[[B' down-line-or-search
 
-# 補完候補のメニュー選択で、矢印キーの代わりにhjklで移動出来るようにする。
+# 補完候補のメニュー選択で、矢印キーの代わりにhjkl/ctrl+hjklで移動出来るようにする。
 zmodload zsh/complist
 bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect '^h' vi-backward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect '^j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect '^k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect '^l' vi-forward-char
 
 ### 補完
 autoload -U compinit; compinit -C
@@ -220,4 +232,7 @@ eval $(thefuck --alias)
 
 # load settings for fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Fig post block. Keep at the bottom of this file.
+. "$HOME/.fig/shell/zshrc.post.zsh"
 
