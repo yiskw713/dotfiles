@@ -137,7 +137,6 @@
         "[x]"
     ],
     "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
-    "workbench.iconTheme": "material-icon-theme",
     "footsteps.doHighlightChanges": true,
     "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace, \"Roboto Mono for Powerline\", \"HackGen35Nerd Console\"",
     "workbench.colorCustomizations": {
@@ -163,4 +162,7 @@
     "zenMode.hideLineNumbers": false,
     // 行数を相対表示
     "editor.lineNumbers": "relative",
+    "terminal.integrated.env.osx": {
+        "FIG_NEW_SESSION": "1"
+    },
 }

@@ -54,6 +54,7 @@ alias tree="tre"
 # other alias
 alias ps="procs"
 alias du="dust"
+alias df="duf"
 alias cat="bat"
 alias cd="cdls"
 alias reload='exec $SHELL -l'
@@ -63,6 +64,7 @@ alias v="vim"
 alias vz="vim ~/.zshrc"
 alias vv="vim ~/.vimrc"
 alias sz="source ~/.zshrc"
+alias screensaver="pipes.sh -p 5 -t 0 -r 5000"
 # docker
 alias d='docker'
 alias dc='docker-compose'
