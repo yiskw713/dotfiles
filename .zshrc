@@ -1,6 +1,9 @@
 # Fig pre block. Keep at the top of this file.
 . "$HOME/.fig/shell/zshrc.pre.zsh"
-# homebrew
+
+# ------------------
+# Homebrew
+# ------------------
 # for M1 mac
 brew_path="/opt/homebrew/bin/brew"
 if [ -e $brew_path ]; then
@@ -13,11 +16,15 @@ if [ -e $brew_path ]; then
     eval "$($brew_path shellenv)"
 fi
 
+# ------------------
 # locale setting
+# ------------------
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
+# ------------------
 # alias settings
+# ------------------
 # zoxide https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init zsh)"
 if [[ $(command -v z) ]]; then
@@ -41,6 +48,19 @@ else
         cd "$@" && ls
     }
 fi
+
+# ghq
+update_all_repos ()
+{
+    ghq list | ghq get --update --parallel
+}
+
+# https://github.com/motemen/github-list-starred
+get_starred_repos ()
+{
+    local n_repos=${1:-10}
+    github-list-starred yiskw713 | head -n $n_repos | ghq get --parallel
+}
 
 # s-search: https://github.com/zquestz/s
 if [[ $(command -v s) ]]; then
@@ -78,7 +98,9 @@ alias c="cargo"
 # python
 alias p="python"
 
+# ------------------
 # zinit
+# ------------------
 source ~/.zinit/bin/zinit.zsh
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
@@ -90,19 +112,32 @@ eval "$(starship init zsh)"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1 
 
 zinit load "mafredri/zsh-async"
+zinit load "chrissicool/zsh-256color"
+zinit load "zsh-users/zsh-autosuggestions"
+zinit load "zsh-users/zsh-completions"
+zinit load "chrissicool/zsh-256color"
 
-# 構文のハイライト(https://github.com/zsh-users/zsh-syntax-highlighting)
-zinit load "zsh-users/zsh-syntax-highlighting"
-
-### history 設定
+# ------------------
+# historyの設定
+# ------------------
 HISTFILE=~/.zsh_historyx
 HISTSIZE=10000
 SAVEHIST=10000
+
+# ignore unnecessary history.
+# Ref: https://www.m3tech.blog/entry/dotfiles-bonsai
+zshaddhistory() {
+    local line="${1%%$'\n'}"
+    [[ ! "$line" =~ "^(cd|z|jj?|lazygit|la|ll|ls|exa)($| )" ]]
+}
 
 # https://superuser.com/questions/585003/searching-through-history-with-up-and-down-arrow-in-zsh
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
+# ------------------
+# 補完
+# ------------------
 # 補完候補のメニュー選択で、矢印キーの代わりにhjkl/ctrl+hjklで移動出来るようにする。
 zmodload zsh/complist
 bindkey -M menuselect 'h' vi-backward-char
@@ -114,47 +149,41 @@ bindkey -M menuselect '^k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect '^l' vi-forward-char
 
-### 補完
 autoload -U compinit; compinit -C
 
-### 補完方法毎にグループ化する。
+# 補完方法毎にグループ化する。
 zstyle ':completion:*' format '%B%F{blue}%d%f%b'
 zstyle ':completion:*' group-name ''
-### 補完侯補をメニューから選択する。
-### select=2: 補完候補を一覧から選択する。補完候補が2つ以上なければすぐに補完する。
+# 補完侯補をメニューから選択する。
+# select=2: 補完候補を一覧から選択する。補完候補が2つ以上なければすぐに補完する。
 zstyle ':completion:*:default' menu select=2
-### 補完候補に色を付ける。
+# 補完候補に色を付ける。
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-### 補完候補がなければより曖昧に候補を探す。
-### m:{a-z}={A-Z}: 小文字を大文字に変えたものでも補完する。
-### r:|[._-]=*: 「.」「_」「-」の前にワイルドカード「*」があるものとして補完する。
+# 補完候補がなければより曖昧に候補を探す。
+# m:{a-z}={A-Z}: 小文字を大文字に変えたものでも補完する。
+# r:|[._-]=*: 「.」「_」「-」の前にワイルドカード「*」があるものとして補完する。
 #zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z} r:|[._-]=*'
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 zstyle ':completion:*' keep-prefix
 zstyle ':completion:*' recent-dirs-insert both
 
-### 補完候補
-### _oldlist 前回の補完結果を再利用する。
-### _complete: 補完する。
-### _match: globを展開しないで候補の一覧から補完する。
-### _history: ヒストリのコマンドも補完候補とする。
-### _ignored: 補完候補にださないと指定したものも補完候補とする。
-### _approximate: 似ている補完候補も補完候補とする。
-### _prefix: カーソル以降を無視してカーソル位置までで補完する。
+# 補完候補
+# _oldlist 前回の補完結果を再利用する。
+# _complete: 補完する。
+# _match: globを展開しないで候補の一覧から補完する。
+# _history: ヒストリのコマンドも補完候補とする。
+# _ignored: 補完候補にださないと指定したものも補完候補とする。
+# _approximate: 似ている補完候補も補完候補とする。
+# _prefix: カーソル以降を無視してカーソル位置までで補完する。
 #zstyle ':completion:*' completer _oldlist _complete _match _history _ignored _approximate _prefix
 zstyle ':completion:*' completer _complete _ignored
 
-## 補完候補をキャッシュする。
+# 補完候補をキャッシュする。
 zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' cache-path ~/.zsh/cache
-## 詳細な情報を使わない
+# 詳細な情報を使わない
 zstyle ':completion:*' verbose no
-
-# タイプ補完
-zinit load "zsh-users/zsh-autosuggestions"
-zinit load "zsh-users/zsh-completions"
-zinit load "chrissicool/zsh-256color"
 
 # ヒストリの補完を強化する
 zinit load "zsh-users/zsh-history-substring-search"
@@ -162,7 +191,7 @@ zinit load "zsh-users/zsh-history-substring-search"
 # use z command: https://github.com/agkozak/zsh-z
 zinit load agkozak/zsh-z
 
-#] 補完候補が複数ある時に、一覧表示
+# 補完候補が複数ある時に、一覧表示
 setopt auto_list
 # 補完キー（Tab, Ctrl+I) を連打するだけで順に補完候補を自動で補完
 setopt auto_menu
@@ -214,7 +243,9 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include"
 # For pkg-config to find zlib you may need to set:
 export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
 
+# ------------------
 # anyenv
+# ------------------
 eval "$(anyenv init -)"
 for D in `ls $HOME/.anyenv/envs`
 do
@@ -223,10 +254,13 @@ done
 
 export PATH="$HOME/.poetry/bin:$PATH"
 
+# ------------------
 # for docker completion
+# ------------------
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
 
+# pyenv
 eval "$(pyenv virtualenv-init -)"
 
 # https://github.com/nvbn/thefuck

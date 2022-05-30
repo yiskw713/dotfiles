@@ -186,3 +186,16 @@ fdimgrm() {
   [ -n "$cid" ] && echo $cid | xargs docker image rm -f
 }
 
+# ghq with fzf
+# ref: https://qiita.com/tomoyamachi/items/e51d2906a5bb24cf1684
+function ghq-fzf() {
+  local src=$(ghq list | fzf --preview "bat $(ghq root)/{}/README.md --color always --style=header,grid")
+  if [ -n "$src" ]; then
+    BUFFER="cd $(ghq root)/$src"
+    zle accept-line
+  fi
+  zle -R -c
+}
+zle -N ghq-fzf
+bindkey '^]' ghq-fzf
+

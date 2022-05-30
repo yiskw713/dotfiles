@@ -62,6 +62,12 @@ if [ $(uname) = Darwin ]; then
 
     # install gtop. https://github.com/aksakalli/gtop
     npm install gtop -g
+
+    # for espanso
+    ln -sf $THIS_DIR/espanso/config/* "${HOME}/Library/Application Support/espanso/config"
+    ln -sf $THIS_DIR/espanso/match/* "${HOME}/Library/Application Support/espanso/match"
+
+
 fi
 
 # for docker completion
@@ -81,20 +87,19 @@ source ~/.zshrc
 anyenv install rbenv
 anyenv install pyenv
 anyenv install nodenv
+anyenv install goenv
 
+pyenv install 3.9.9
 pyenv install 3.8.2
 pyenv install 3.7.7
+nodenv install 16.3.0
+goenv install 1.18.2
 
 # poetry install
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 
-# install powershell font to use robot mono for powerline.
-# TODO: set the font in terminal preferences.
-git clone https://github.com/powerline/fonts.git --depth=1
-cd fonts
-./install.sh
-cd ..
-rm -rf fonts
+# install github-list-starred
+go get github.com/motemen/github-list-starred
 
 # install lightline.vim
 git clone https://github.com/itchyny/lightline.vim ~/.vim/pack/plugins/start/lightline
