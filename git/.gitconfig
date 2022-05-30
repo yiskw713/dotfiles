@@ -1,0 +1,28 @@
+[user]
+    email = i.yuchi713@gmail.com
+    username = yiskw713
+
+[init]
+    defaultBranch = main
+
+[core]
+    pager = delta
+    editor = vim
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+[ghq]
+    root = ~/work
+
+[alias]
+    tree = "log --graph --date=iso --pretty='[%ad]%C(auto) %h%d %Cgreen%an%Creset : %s'"

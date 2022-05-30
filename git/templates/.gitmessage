@@ -1,0 +1,84 @@
+# --------------------------
+# Format of the commit message
+# Reference: <https://gist.github.com/stephenparish/9941e89d80e2bc58a153>
+# --------------------------
+
+<type>: <subject>
+<BLANK LINE>
+<body>
+<BLANK LINE>
+<footer>
+
+
+# --------------------------
+# Rules
+# --------------------------
+
+Any line of the commit message cannot be longer 100 characters! This allows the message to be easier to read on github as well as in various git tools.
+
+##  Subject line        
+
+Subject line contains succinct description of the change.
+
+### Allowed `<type>`
+
+Use gitmoji to show commit <type>.
+Reference: https://gitmoji.dev/
+
+✨ :sparkles: Introduce new features.
+⚡️ :zap: Improve performance.
+🔥 :fire: Remove code or files.
+🐛 :bug: Fix a bug.
+🩹 :adhesive_bandage: Simple fix for a non-critical issue.
+🚧 :construction: Work in progress.
+🎉 :tada: Begin a project.
+🎨 :art: Improve structure / format of the code.
+♻️ :recycle: Refactor code.
+📝 :memo: Add or update documentation.
+🚑️ :ambulance: Critical hotfix.
+⏪️ :rewind: Revert changes.
+🙈 :see_no_evil: Add or update a .gitignore file.
+✏️ :pencil2: Fix typos.
+🚚 :truck: Move or rename resources (e.g.: files, paths, routes).
+💡 :bulb: Add or update comments in source code.
+💥 :boom: Introduce breaking changes.
+🔀 :twisted_rightwards_arrows: Merge branches.
+✅ :white_check_mark: Add, update, or pass tests.
+⚗️ :alembic: Perform experiments.
+🧑‍💻 :bricks: Improve developer experience
+➕ :heavy_plus_sign: Add a dependency.
+➖ :heavy_minus_sign: Remove a dependency.
+⬇️ :arrow_down: Downgrade dependencies.
+⬆️ :arrow_up: Upgrade dependencies.
+💚 :green_heart: Fix CI Build.
+🍱 :bento: Add or update assets.
+🏗️ :building_construction: Make architectural changes.
+🧱 :bricks: Infrastructure related changes.
+🔨 :hammer: Add or update development scripts.
+💩 :poop: Write bad code that needs to be improved.
+
+### `<subject>` text
+
+* use imperative, present tense: “change” not “changed” nor “changes”
+* don't capitalize first letter
+* no dot (.) at the end
+
+## Message body
+
+* just as in <subject> use imperative, present tense: “change” not “changed” nor “changes”
+* includes motivation for the change and contrasts with previous behavior
+
+## Message footer
+
+### Breaking changes
+
+All breaking changes have to be mentioned in footer with the description of the change, justification and migration notes
+
+### Referencing issues
+
+Closed bugs should be listed on a separate line in the footer prefixed with "Closes" keyword like this:
+
+```
+Closes #123, #245, #992
+```
+

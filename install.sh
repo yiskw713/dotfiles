@@ -22,7 +22,10 @@ ln -sf $THIS_DIR/.fzf.zsh $HOME/.fzf.zsh
 
 # setting for alacritty
 mkdir -p $HOME/.config/alacritty
-ln -sf $PWD/alacritty.yml $HOME/.config/alacritty
+ln -sf $THIS_DIR/alacritty.yml $HOME/.config/alacritty
+
+# setting for git
+ln -sf $THIS_DIR/git/.gitconfig $HOME/.gitconfig
 
 
 # zinit install
