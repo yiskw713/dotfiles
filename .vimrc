@@ -42,6 +42,7 @@ set clipboard=unnamed,autoselect
 " 表示
 "----------------------------------------
 " カラースキーム
+set t_ut=
 colorscheme codedark
 " ダーク系のカラースキームを使う
 set background=dark
@@ -158,7 +159,6 @@ if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
 endif
 
 syntax on
-set termguicolors
 
 " 行の表示を相対的な表示にする
 set relativenumber

@@ -1,6 +1,3 @@
-# Fig pre block. Keep at the top of this file.
-. "$HOME/.fig/shell/zshrc.pre.zsh"
-
 # ------------------
 # Homebrew
 # ------------------
@@ -21,6 +18,7 @@ fi
 # ------------------
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
+export TERM='xterm-256color'
 
 # ------------------
 # alias settings
@@ -90,9 +88,14 @@ alias d='docker'
 alias dc='docker-compose'
 alias dimg='docker image'
 alias dcnt='docker container'
+alias dnet="docker network"
 # git
 alias gcm='git commit -m'
 alias g="git"
+alias go="git open"
+alias push='git push origin'
+alias pull='git pull origin'
+alias stash='git stash'
 # rust
 alias c="cargo"
 # python
@@ -115,7 +118,7 @@ zinit load "mafredri/zsh-async"
 zinit load "chrissicool/zsh-256color"
 zinit load "zsh-users/zsh-autosuggestions"
 zinit load "zsh-users/zsh-completions"
-zinit load "chrissicool/zsh-256color"
+zinit load "zsh-users/zsh-syntax-highlighting"
 
 # ------------------
 # historyの設定
@@ -252,7 +255,8 @@ do
     export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
 done
 
-export PATH="$HOME/.poetry/bin:$PATH"
+# for claude code
+export PATH="$HOME/.local/bin:$PATH"
 
 # ------------------
 # for docker completion
@@ -269,6 +273,19 @@ eval $(thefuck --alias)
 # load settings for fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Fig post block. Keep at the bottom of this file.
-. "$HOME/.fig/shell/zshrc.post.zsh"
+# -----------------
+# for M1 mac
+# -----------------
+# useful only for Mac OS Silicon M1, 
+# still working but useless for the other platforms
+# ref: https://stackoverflow.com/questions/66662820/m1-docker-preview-and-keycloak-images-platform-linux-amd64-does-not-match-th
+docker() {
+ if [[ `uname -m` == "arm64" ]] && [[ "$1" == "run" || "$1" == "build" ]]; then
+    /usr/local/bin/docker "$1" --platform linux/amd64 "${@:2}"
+  else
+     /usr/local/bin/docker "$@"
+  fi
+}
 
+# for poetry
+export PATH="//Users/yuchi/Library/Preferences/pypoetry/bin:$PATH"
