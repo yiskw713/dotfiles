@@ -29,15 +29,15 @@ if [[ $(command -v z) ]]; then
     alias cd="z"
 fi
 
-# exa: https://github.com/ogham/exa
-if [[ $(command -v exa) ]]; then
-    alias exa="exa -a --icons --git -h -g"
-    alias ls="exa"
+# eza: https://github.com/eza-community/eza
+if [[ $(command -v eza) ]]; then
+    alias eza="eza -a --icons --git -h -g"
+    alias ls="eza"
 
     # cdls
     cdls ()
     {
-        cd "$@" && exa -a --icons --git -h -g
+        cd "$@" && eza -a --icons --git -h -g
     }
 else
     alias ls="ls -a"
@@ -127,7 +127,7 @@ SAVEHIST=10000
 # Ref: https://www.m3tech.blog/entry/dotfiles-bonsai
 zshaddhistory() {
     local line="${1%%$'\n'}"
-    [[ ! "$line" =~ "^(cd|z|jj?|lazygit|la|ll|ls|exa)($| )" ]]
+    [[ ! "$line" =~ "^(cd|z|jj?|lazygit|la|ll|ls|eza)($| )" ]]
 }
 
 # https://superuser.com/questions/585003/searching-through-history-with-up-and-down-arrow-in-zsh
@@ -257,9 +257,6 @@ export PATH="$HOME/.local/bin:$PATH"
 # ------------------
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
-
-# https://github.com/nvbn/thefuck
-eval $(thefuck --alias)
 
 # load settings for fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
