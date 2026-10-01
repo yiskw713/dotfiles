@@ -14,7 +14,7 @@ Each tool has its own directory; `install_procedure.sh` symlinks them into place
 
 - `Brewfile`: Homebrew packages and casks
 - `mise/config.toml`: languages (python, node, go, ruby), `uv` and CLI tools managed by [mise](https://mise.jdx.dev/)
-- `zsh/`, `tmux/`, `vim/`, `git/`, `alacritty/`, `starship/`, `procs/`, `vscode/`, `espanso/`: tool configs
+- `zsh/`, `tmux/`, `herdr/`, `vim/`, `git/`, `alacritty/`, `starship/`, `procs/`, `vscode/`, `espanso/`: tool configs
 
 ## Font
 

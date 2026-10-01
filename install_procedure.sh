@@ -13,11 +13,14 @@ link() { ln -sfn "$1" "$2"; }
 # 1. Symlinks
 # ------------------------------------------------------------
 echo "Creating symlinks..."
-mkdir -p ~/.config/{mise,procs,alacritty}
+mkdir -p ~/.config/{mise,procs,alacritty,herdr}
 
 link "$DOTFILES_DIR/zsh/.zshrc"          ~/.zshrc
 link "$DOTFILES_DIR/zsh/.fzf.zsh"        ~/.fzf.zsh
 link "$DOTFILES_DIR/tmux/.tmux.conf"     ~/.tmux.conf
+link "$DOTFILES_DIR/herdr/config.toml"   ~/.config/herdr/config.toml
+link "$DOTFILES_DIR/herdr/status.sh"     ~/.config/herdr/status.sh
+link "$DOTFILES_DIR/herdr/name-pane.sh"   ~/.config/herdr/name-pane.sh
 link "$DOTFILES_DIR/vim/.vimrc"          ~/.vimrc
 link "$DOTFILES_DIR/git/.gitconfig"      ~/.gitconfig
 link "$DOTFILES_DIR/starship/starship.toml" ~/.config/starship.toml

@@ -68,6 +68,7 @@ alias cat="bat"
 alias cd="cdls"
 alias reload='exec $SHELL -l'
 alias t="tmux"
+alias h="herdr"
 alias v="vim"
 alias vz="vim ~/.zshrc"
 alias vv="vim ~/.vimrc"
@@ -217,3 +218,6 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # load settings for fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# herdr 内のシェルなら、ペイン名を自動で付ける (pane 1, pane 2, ...)
+[[ -n "$HERDR_PANE_ID" ]] && ~/.config/herdr/name-pane.sh &>/dev/null &!

@@ -60,8 +60,8 @@ set visualbell
 set showmatch
 " ステータスラインを常に表示
 set laststatus=2
-" メッセージ表示欄を2行確保
-set cmdheight=2
+" メッセージ表示欄を1行にする
+set cmdheight=1
 let g:lightline = { 'colorscheme': 'codedark' }
 " コマンドラインの補完
 set wildmode=list:longest

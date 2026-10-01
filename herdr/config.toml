@@ -1,0 +1,127 @@
+# herdr configuration (tmux/.tmux.conf 相当)
+# ~/.config/herdr/config.toml にシンボリックリンクして使う。
+# 反映: prefix + r、または `herdr server reload-config`
+
+onboarding = false
+
+[theme]
+# ホストターミナルの配色をそのまま使う
+name = "terminal"
+
+# tmux の status-style (fg=white,bg=black) / アクティブ window (bg=red) に寄せる
+[theme.custom]
+panel_bg = "black"
+text = "white"
+active_row_bg = "#264f78"
+
+[terminal]
+# macOS の zsh を常にログインシェルで起動
+shell_mode = "login"
+# 新規ペイン/タブは現在のペインのディレクトリを引き継ぐ
+new_cwd = "follow"
+
+[keys]
+# prefix を C-f に変更 (tmux: set -g prefix C-f)
+prefix = "ctrl+f"
+
+# 設定のリロード (tmux: bind r)。resize_mode は shift+r へ退避
+reload_config = "prefix+r"
+resize_mode = "prefix+shift+r"
+
+# ペイン分割 (tmux: | / \ / -)。herdr では左右分割が split_vertical
+split_vertical = "prefix+backslash"
+split_horizontal = "prefix+minus"
+
+# Vim のキーバインドでペイン移動 (tmux: h/j/k/l) - herdr のデフォルトと同じ
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# ウィンドウ(=tab)の移動はデフォルトの prefix+p / prefix+n (tmux: C-h / C-l)
+
+# ペインの入れ替え (デフォルトは prefix+shift+hjkl だがリサイズに使うため ctrl に移動)
+swap_pane_left = "prefix+ctrl+h"
+swap_pane_down = "prefix+ctrl+j"
+swap_pane_up = "prefix+ctrl+k"
+swap_pane_right = "prefix+ctrl+l"
+
+# Vim のキーバインドでペインをリサイズ (tmux: H/J/K/L)
+resize_pane_left = "prefix+shift+h"
+resize_pane_down = "prefix+shift+j"
+resize_pane_up = "prefix+shift+k"
+resize_pane_right = "prefix+shift+l"
+
+# workspace 選択 (navigate モード) も vim 風に j/k で移動
+navigate_workspace_down = "j"
+navigate_workspace_up = "k"
+
+# サイドバーの agents 欄の順に、前後のエージェントへ移動
+previous_agent = "prefix+comma"
+next_agent = "prefix+period"
+
+# 直前にいたペインへ戻る (tmux: bind ;)
+last_pane = "prefix+semicolon"
+
+# detach は prefix+q と prefix+d の両方 (tmux: prefix+d)
+detach = ["prefix+q", "prefix+d"]
+
+# スクロールバック全体をエディタで開く (tmux: bind v)
+edit_scrollback = "prefix+v"
+
+# フローティングのシェル (tmux: bind f の display-popup)
+[[keys.command]]
+key = "prefix+f"
+type = "popup"
+command = "zsh"
+width = "80%"
+height = "80%"
+
+[ui]
+# workspace 作成時に名前を入力する (cwd 由来の自動名にしない)
+prompt_new_workspace_name = true
+# tab 作成時は名前を聞かず、自動で "tab N" を付ける (name-pane.sh)
+prompt_new_tab_name = false
+# 外側の端末のタイトル
+window_title = "Herdr: {workspace}, {tab}, {pane}"
+# サイドバーの agents 欄は承認待ちなどの優先度順
+agent_panel_sort = "priority"
+# アクティブなペインの枠などを黄色に (tmux: pane-active-border-style fg=yellow)
+accent = "yellow"
+# 状態を点ではなく、状態ごとに別の記号で表示する
+status_indicators = "symbols"
+# マウスでペイン/タブの切り替えやリサイズ (tmux: set -g mouse on)
+mouse_capture = true
+# 選択したテキストを自動でクリップボードへ (tmux: copy-pipe pbcopy)
+copy_on_select = true
+mouse_scroll_lines = 3
+
+# ステータスバーを上に表示 (tmux: status-position top)
+tab_bar_position = "top"
+tab_bar_right = [
+  { type = "command", command = "~/.config/herdr/status.sh cpu", interval_seconds = 5, timeout_seconds = 3 },
+  { type = "command", command = "~/.config/herdr/status.sh ram", interval_seconds = 5, timeout_seconds = 3 },
+  { type = "datetime", format = "[%Y-%m-%d(%a) %H:%M]" },
+  { type = "command", command = "~/.config/herdr/status.sh weather", interval_seconds = 1800, timeout_seconds = 5 },
+]
+tab_bar_right_separator = "  "
+
+# ペインボーダー
+pane_borders = "auto"
+# ペイン間の隙間をなくし、境界線を共有する (tmux と同じ見た目)
+pane_gaps = false
+# 外周の枠を表示する (サイドバーとの境界線にもなる)
+pane_outer_borders = true
+
+[ui.sidebar.agents]
+# 状態アイコンに加えて状態名のテキスト (working など) も表示する
+# pane = prefix+shift+p で付けたペイン名、terminal_title_stripped = エージェントの作業内容
+rows = [["state_icon", "state_text", "machine", "workspace"], ["tab", "pane"], ["terminal_title_stripped"], ["agent"]]
+
+[ui.sidebar.spaces]
+rows = [["state_icon", "state_text", "workspace"], ["branch", "git_status"]]
+
+[ui.toast]
+# 別ワークスペースでの動き/完了通知 (tmux: monitor-activity / visual-activity)
+# terminal = 外側の端末の通知 (SSH 越しでも届く)。音は ui.sound (既定で有効) で鳴る
+delivery = "terminal"
