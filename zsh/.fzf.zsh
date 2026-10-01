@@ -1,34 +1,6 @@
-# Setup fzf
-# -------------
-# for M1 mac
-# -------------
-if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
-fi
-
-# Auto-completion
-[[ $- == *i* ]] && source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null
-
-# Key bindings
-key_binding_file="/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
-if [ -e $key_binding_file ]; then
-    source $key_binding_file
-fi
-
-# -------------
-# for Intel Mac
-# -------------
-if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}/usr/local/opt/fzf/bin"
-fi
-
-# Auto-completion
-[[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
-
-# Key bindings
-key_binding_file="/usr/local/opt/fzf/shell/key-bindings.zsh"
-if [ -e $key_binding_file ]; then
-    source $key_binding_file
+# Setup fzf (installed via mise)
+if (( $+commands[fzf] )); then
+  source <(fzf --zsh)
 fi
 
 # -------------
@@ -60,7 +32,7 @@ fgc() {
   local branches branch
   branches=$(git branch --all | grep -v HEAD) &&
   branch=$(echo "$branches" |
-           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+           fzf --height=$(( 2 + $(wc -l <<< "$branches") )) +m) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
@@ -94,9 +66,9 @@ fadd() {
   while out=$(
       git status --short |
       awk '{if (substr($0,2,1) !~ / /) print $2}' |
-      fzf-tmux --multi --exit-0 --expect=ctrl-d); do
+      fzf --multi --exit-0 --expect=ctrl-d); do
     q=$(head -1 <<< "$out")
-    n=$[$(wc -l <<< "$out") - 1]
+    n=$(( $(wc -l <<< "$out") - 1 ))
     addfiles=(`echo $(tail "-$n" <<< "$out")`)
     [[ -z "$addfiles" ]] && continue
     if [ "$q" = ctrl-d ]; then
@@ -139,7 +111,7 @@ bindkey '^z' zi
 # プロセスをkill
 fkill() {
   local pid
-  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+  pid=$(command ps -ef | sed 1d | fzf -m | awk '{print $2}')
 
   if [ "x$pid" != "x" ]
   then
