@@ -22,7 +22,7 @@ link "$DOTFILES_DIR/vim/.vimrc"          ~/.vimrc
 link "$DOTFILES_DIR/git/.gitconfig"      ~/.gitconfig
 link "$DOTFILES_DIR/starship/starship.toml" ~/.config/starship.toml
 link "$DOTFILES_DIR/procs/config.toml"   ~/.config/procs/config.toml
-link "$DOTFILES_DIR/alacritty/alacritty.yml" ~/.config/alacritty/alacritty.yml
+link "$DOTFILES_DIR/alacritty/alacritty.toml" ~/.config/alacritty/alacritty.toml
 link "$DOTFILES_DIR/mise/config.toml"    ~/.config/mise/config.toml
 
 # ------------------------------------------------------------
