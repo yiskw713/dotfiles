@@ -127,6 +127,9 @@ endif
 " undoの永続化(一度ファイルを閉じてもundoできる)
 if has('persistent_undo')
   let undo_path = expand('~/.vim/undo')
+  if !isdirectory(undo_path)
+    call mkdir(undo_path, 'p', 0700)
+  endif
   exe 'set undodir=' .. undo_path
   set undofile
 endif
