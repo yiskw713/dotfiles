@@ -1,0 +1,14 @@
+#!/bin/bash
+# Show Claude Code state in the tmux window title.
+# usage: claude-tmux-status waiting|done|clear   (called from Claude Code hooks)
+[ -n "${TMUX_PANE:-}" ] || exit 0
+case "${1:-clear}" in
+  waiting) icon="⌛" ;;
+  done)    icon="✅" ;;
+  *)       icon="" ;;
+esac
+if [ -n "$icon" ]; then
+  tmux set-option -w -t "$TMUX_PANE" @claude_status "$icon"
+else
+  tmux set-option -wu -t "$TMUX_PANE" @claude_status
+fi

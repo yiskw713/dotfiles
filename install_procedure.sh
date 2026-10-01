@@ -13,7 +13,7 @@ link() { ln -sfn "$1" "$2"; }
 # 1. Symlinks
 # ------------------------------------------------------------
 echo "Creating symlinks..."
-mkdir -p ~/.config/{mise,procs,alacritty}
+mkdir -p ~/.config/{mise,procs,alacritty} ~/.local/bin
 
 link "$DOTFILES_DIR/zsh/.zshrc"          ~/.zshrc
 link "$DOTFILES_DIR/zsh/.fzf.zsh"        ~/.fzf.zsh
@@ -24,6 +24,7 @@ link "$DOTFILES_DIR/starship/starship.toml" ~/.config/starship.toml
 link "$DOTFILES_DIR/procs/config.toml"   ~/.config/procs/config.toml
 link "$DOTFILES_DIR/alacritty/alacritty.toml" ~/.config/alacritty/alacritty.toml
 link "$DOTFILES_DIR/mise/config.toml"    ~/.config/mise/config.toml
+link "$DOTFILES_DIR/tmux/claude-tmux-status" ~/.local/bin/claude-tmux-status
 
 # ------------------------------------------------------------
 # 2. macOS
