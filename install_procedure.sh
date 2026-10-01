@@ -7,7 +7,15 @@ set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-link() { ln -sfn "$1" "$2"; }
+# Symlink $1 to $2. A real file/dir already at $2 is moved aside to $2.bak.<timestamp>.
+link() {
+  if [ -e "$2" ] && [ ! -L "$2" ]; then
+    local backup="$2.bak.$(date +%Y%m%d%H%M%S)"
+    echo "  backup: $2 -> $backup"
+    mv "$2" "$backup"
+  fi
+  ln -sfn "$1" "$2"
+}
 
 # ------------------------------------------------------------
 # 1. Symlinks
@@ -27,6 +35,7 @@ link "$DOTFILES_DIR/starship/starship.toml" ~/.config/starship.toml
 link "$DOTFILES_DIR/procs/config.toml"   ~/.config/procs/config.toml
 link "$DOTFILES_DIR/alacritty/alacritty.toml" ~/.config/alacritty/alacritty.toml
 link "$DOTFILES_DIR/mise/config.toml"    ~/.config/mise/config.toml
+link "$DOTFILES_DIR/mise/mise.lock"      ~/.config/mise/mise.lock
 
 # ------------------------------------------------------------
 # 2. macOS
@@ -34,10 +43,11 @@ link "$DOTFILES_DIR/mise/config.toml"    ~/.config/mise/config.toml
 if [ "$(uname)" = Darwin ]; then
   echo "Configuring macOS defaults..."
   mkdir -p ~/Pictures/ScreenShots
-  defaults write com.apple.screencapture location ~/Pictures/
+  defaults write com.apple.screencapture location ~/Pictures/ScreenShots
   chflags nohidden ~/
   defaults write com.apple.finder AppleShowAllFiles TRUE
   defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+  killall Finder SystemUIServer &>/dev/null || true
 
   xcode-select -p &>/dev/null || xcode-select --install
 
@@ -57,8 +67,12 @@ if [ "$(uname)" = Darwin ]; then
   mkdir -p ~/Library/Application\ Support/Code/User
   link "$DOTFILES_DIR/vscode/settings.json" ~/Library/Application\ Support/Code/User/settings.json
   mkdir -p ~/Library/Application\ Support/espanso/{config,match}
-  ln -sf "$DOTFILES_DIR"/espanso/config/* ~/Library/Application\ Support/espanso/config/
-  ln -sf "$DOTFILES_DIR"/espanso/match/*  ~/Library/Application\ Support/espanso/match/
+  for f in "$DOTFILES_DIR"/espanso/config/*; do
+    link "$f" ~/Library/Application\ Support/espanso/config/"$(basename "$f")"
+  done
+  for f in "$DOTFILES_DIR"/espanso/match/*; do
+    link "$f" ~/Library/Application\ Support/espanso/match/"$(basename "$f")"
+  done
 fi
 
 # ------------------------------------------------------------
