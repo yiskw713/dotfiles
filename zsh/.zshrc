@@ -1,16 +1,8 @@
 # ------------------
 # Homebrew
 # ------------------
-# for M1 mac
-brew_path="/opt/homebrew/bin/brew"
-if [ -e $brew_path ]; then
-    eval "$($brew_path shellenv)"
-fi
-
-# for intel mac
-brew_path="/usr/local/bin/brew"
-if [ -e $brew_path ]; then
-    eval "$($brew_path shellenv)"
+if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # ------------------
@@ -76,7 +68,6 @@ alias df="duf"
 alias cat="bat"
 alias cd="cdls"
 alias reload='exec $SHELL -l'
-alias gc="google-chrome"
 alias t="tmux"
 alias v="vim"
 alias vz="vim ~/.zshrc"
@@ -148,7 +139,9 @@ bindkey -M menuselect '^k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect '^l' vi-forward-char
 
-autoload -U compinit; compinit -C
+# for docker completion etc.
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -C
 
 # 補完方法毎にグループ化する。
 zstyle ':completion:*' format '%B%F{blue}%d%f%b'
@@ -231,17 +224,6 @@ setopt no_beep
 setopt no_hist_beep
 setopt no_list_beep
 
-# for cpp
-export SDKROOT="$(xcrun --sdk macosx --show-sdk-path)"
-
-# for zlib
-# For compilers to find zlib you may need to set:
-export LDFLAGS="-L/usr/local/opt/zlib/lib"
-export CPPFLAGS="-I/usr/local/opt/zlib/include"
-
-# For pkg-config to find zlib you may need to set:
-export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
-
 # ------------------
 # mise
 # ------------------
@@ -252,25 +234,5 @@ fi
 # for claude code
 export PATH="$HOME/.local/bin:$PATH"
 
-# ------------------
-# for docker completion
-# ------------------
-fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit && compinit -i
-
 # load settings for fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# -----------------
-# for M1 mac
-# -----------------
-# useful only for Mac OS Silicon M1, 
-# still working but useless for the other platforms
-# ref: https://stackoverflow.com/questions/66662820/m1-docker-preview-and-keycloak-images-platform-linux-amd64-does-not-match-th
-docker() {
- if [[ `uname -m` == "arm64" ]] && [[ "$1" == "run" || "$1" == "build" ]]; then
-    /usr/local/bin/docker "$1" --platform linux/amd64 "${@:2}"
-  else
-     /usr/local/bin/docker "$@"
-  fi
-}
