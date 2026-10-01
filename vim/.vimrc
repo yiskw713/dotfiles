@@ -13,10 +13,8 @@ call plug#end()
 set fenc=utf-8
 " ファイルを上書きする前にバックアップを作ることを無効化
 set nowritebackup
-" ファイルを上書きする前にバックアップを作ることを無効化
+" バックアップファイルを作らない
 set nobackup
-" vim の矩形選択で文字が無くても右へ進める
-set virtualedit=block
 " 挿入モードでバックスペースで削除できるようにする
 set backspace=indent,eol,start
 " 全角文字専用の設定
@@ -74,10 +72,8 @@ nnoremap j gj
 nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
-" 対応する括弧やブレースを表示
-set showmatch matchtime=1
-" 行末のスペースを可視化
-set listchars=tab:^\ ,trail:~
+" 対応する括弧の強調表示時間
+set matchtime=1
 " コマンドラインの履歴を10000件保存する
 set history=10000
 " メニューバーを非表示にする
@@ -94,12 +90,10 @@ set guioptions-=T
 set list listchars=tab:\▸\-
 " Tab文字を半角スペースにする
 set expandtab
-" 行頭以外のTab文字の表示幅（スペースいくつ分）
+" Tab文字の表示幅（スペースいくつ分）
 set tabstop=4
 " 行頭でのTab文字の表示幅
 set shiftwidth=4
-" ファイル内にあるタブ文字の表示幅
-set tabstop=4
 
 "----------------------------------------
 " 検索系
@@ -137,19 +131,6 @@ if has('persistent_undo')
   set undofile
 endif
 
-" コピペの際にpasteモードに入らずとも、インデントがずれないようにする
-" https://stackoverflow.com/questions/2514445/turning-off-auto-indent-when-pasting-text-into-vim/38258720#38258720
-let &t_SI .= "\<Esc>[?2004h"
-let &t_EI .= "\<Esc>[?2004l"
-
-inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-
-function! XTermPasteBegin()
-    set pastetoggle=<Esc>[201~
-    set paste
-    return ""
-endfunction
-
 " https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
 " You might have to force true color when using regular vim inside tmux as the
 " colorscheme can appear to be grayscale with "termguicolors" option enabled.
@@ -157,8 +138,6 @@ if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
-
-syntax on
 
 " 行の表示を相対的な表示にする
 set relativenumber

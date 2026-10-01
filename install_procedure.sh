@@ -71,12 +71,15 @@ mise exec go -- go install github.com/motemen/github-list-starred@master
 # ------------------------------------------------------------
 # 5. zsh / tmux / vim plugins
 # ------------------------------------------------------------
-[ -d ~/.zinit ] || sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+# zsh/.zshrc sources ~/.zinit/bin/zinit.zsh
+[ -d ~/.zinit/bin ] || git clone https://github.com/zdharma-continuum/zinit.git ~/.zinit/bin
 
 mkdir -p ~/.zsh/completion
 [ -d ~/.tmux/plugins/tpm ] || git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-[ -d ~/.vim/pack/plugins/start/lightline ] || git clone https://github.com/itchyny/lightline.vim ~/.vim/pack/plugins/start/lightline
-[ -d ~/.vim/bundle/Vundle.vim ] || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
+~/.tmux/plugins/tpm/bin/install_plugins
+# vim-plug (plugins are declared in vim/.vimrc)
+[ -f ~/.vim/autoload/plug.vim ] || curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim -es -u ~/.vimrc +PlugInstall +qall || true
 
 echo "Done. Restart your shell."

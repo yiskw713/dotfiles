@@ -10,7 +10,6 @@ fi
 # ------------------
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
-export TERM='xterm-256color'
 
 # ------------------
 # alias settings
@@ -101,8 +100,6 @@ autoload -Uz _zinit
 # starship
 eval "$(starship init zsh)"
 
-zinit load "mafredri/zsh-async"
-zinit load "chrissicool/zsh-256color"
 zinit load "zsh-users/zsh-autosuggestions"
 zinit load "zsh-users/zsh-completions"
 zinit load "zsh-users/zsh-syntax-highlighting"
@@ -151,24 +148,14 @@ zstyle ':completion:*' group-name ''
 zstyle ':completion:*:default' menu select=2
 # 補完候補に色を付ける。
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-# 補完候補がなければより曖昧に候補を探す。
 # m:{a-z}={A-Z}: 小文字を大文字に変えたものでも補完する。
-# r:|[._-]=*: 「.」「_」「-」の前にワイルドカード「*」があるものとして補完する。
-#zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z} r:|[._-]=*'
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 zstyle ':completion:*' keep-prefix
 zstyle ':completion:*' recent-dirs-insert both
 
-# 補完候補
-# _oldlist 前回の補完結果を再利用する。
 # _complete: 補完する。
-# _match: globを展開しないで候補の一覧から補完する。
-# _history: ヒストリのコマンドも補完候補とする。
 # _ignored: 補完候補にださないと指定したものも補完候補とする。
-# _approximate: 似ている補完候補も補完候補とする。
-# _prefix: カーソル以降を無視してカーソル位置までで補完する。
-#zstyle ':completion:*' completer _oldlist _complete _match _history _ignored _approximate _prefix
 zstyle ':completion:*' completer _complete _ignored
 
 # 補完候補をキャッシュする。
@@ -179,9 +166,6 @@ zstyle ':completion:*' verbose no
 
 # ヒストリの補完を強化する
 zinit load "zsh-users/zsh-history-substring-search"
-
-# use z command: https://github.com/agkozak/zsh-z
-zinit load agkozak/zsh-z
 
 # 補完候補が複数ある時に、一覧表示
 setopt auto_list
@@ -216,9 +200,6 @@ setopt hist_ignore_dups
 setopt share_history
 # ヒストリにhistoryコマンドを記録しない
 setopt hist_no_store
-# 環境変数を補完
-setopt AUTO_PARAM_KEYS
-
 # ビープを無効にする
 setopt no_beep
 setopt no_hist_beep
