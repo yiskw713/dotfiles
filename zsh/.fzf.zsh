@@ -9,7 +9,7 @@ fi
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!**/.git/*"'
 export FZF_DEFAULT_OPTS="
     --height 40% --reverse --border=sharp --margin=0,1
-    --prompt=' ' --color=light
+    --prompt=' '
 "
 
 # for finding files in current directories
@@ -103,10 +103,14 @@ fzf-z-search() {
   fi
 }
 
-# zle -N fzf-z-search
-# bindkey '^z' fzf-z-search
-zle -N zi
-bindkey '^z' zi
+# zoxide の対話選択 (zi) を Ctrl-z で呼ぶ。
+# zinit も `zi` alias を定義するので、zoxide の関数名 __zoxide_zi を直接使う
+zoxide-zi-widget() {
+  __zoxide_zi
+  zle reset-prompt
+}
+zle -N zoxide-zi-widget
+bindkey '^z' zoxide-zi-widget
 
 # プロセスをkill
 fkill() {

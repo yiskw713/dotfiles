@@ -8,33 +8,31 @@ fi
 # ------------------
 # locale setting
 # ------------------
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
+export LANG="en_US.UTF-8"
 
 # ------------------
 # alias settings
 # ------------------
 # zoxide https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init zsh)"
-if [[ $(command -v z) ]]; then
-    alias cd="z"
-fi
 
 # eza: https://github.com/eza-community/eza
 if [[ $(command -v eza) ]]; then
     alias eza="eza -a --icons --git -h -g"
     alias ls="eza"
+    alias ll="eza -l"
 
     # cdls
     cdls ()
     {
-        cd "$@" && eza -a --icons --git -h -g
+        z "$@" && eza -a --icons --git -h -g
     }
 else
     alias ls="ls -a"
+    alias ll="ls -l"
     cdls ()
     {
-        cd "$@" && ls
+        z "$@" && ls
     }
 fi
 
@@ -64,7 +62,6 @@ alias tree="tre"
 alias ps="procs"
 alias du="dust"
 alias df="duf"
-alias cat="bat"
 alias cd="cdls"
 alias reload='exec $SHELL -l'
 alias t="tmux"
@@ -91,6 +88,13 @@ alias c="cargo"
 # python
 alias p="python"
 
+# alias を使ったとき、実行前に展開後のコマンドを表示する
+autoload -Uz add-zsh-hook
+show_alias_expansion() {
+  [[ "$1" != "$2" ]] && print -P "%F{8}→ ${2//\%/%%}%f"
+}
+add-zsh-hook preexec show_alias_expansion
+
 # ------------------
 # zinit
 # ------------------
@@ -101,14 +105,18 @@ autoload -Uz _zinit
 # starship
 eval "$(starship init zsh)"
 
-zinit load "zsh-users/zsh-autosuggestions"
+# turbo mode (wait): prompt を先に出してプラグインを遅延ロードする
+# syntax-highlighting は他のプラグイン/bindkey の後にロードする必要があるので最後
 zinit load "zsh-users/zsh-completions"
+zinit ice wait lucid
+zinit load "zsh-users/zsh-autosuggestions"
+zinit ice wait lucid
 zinit load "zsh-users/zsh-syntax-highlighting"
 
 # ------------------
 # historyの設定
 # ------------------
-HISTFILE=~/.zsh_historyx
+HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
@@ -165,9 +173,6 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 # 詳細な情報を使わない
 zstyle ':completion:*' verbose no
 
-# ヒストリの補完を強化する
-zinit load "zsh-users/zsh-history-substring-search"
-
 # 補完候補が複数ある時に、一覧表示
 setopt auto_list
 # 補完キー（Tab, Ctrl+I) を連打するだけで順に補完候補を自動で補完
@@ -193,11 +198,9 @@ setopt magic_equal_subst
 # コマンドラインでも # 以降をコメントと見なす
 setopt interactive_comments
 
-# 履歴をすぐに追加する（通常はシェル終了時）
-setopt inc_append_history
 # 重複したコマンドラインはヒストリに追加しない
 setopt hist_ignore_dups
-# 履歴の共有
+# 履歴をすぐに追加し、セッション間で共有する
 setopt share_history
 # ヒストリにhistoryコマンドを記録しない
 setopt hist_no_store

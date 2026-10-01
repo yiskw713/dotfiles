@@ -4,29 +4,12 @@
     "editor.bracketPairColorization.enabled": true, // 括弧の対応を色付ける
     "workbench.startupEditor": "newUntitledFile",
     // pythonの環境設定
-    "python.pythonPath": "/usr/bin/python3",
     "files.watcherExclude": {
         "**/venv/**": true
     },
     "python.analysis.extraPaths": [
         "./src"
     ],
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.linting.mypyEnabled": true,
-    "python.linting.lintOnSave": true,
-    "python.linting.flake8Args": [
-        "--max-line-length",
-        "88",
-        "--ignore=E402,PT011,E501,E203,W503,W504",
-        "--max-complexity",
-        "10",
-        "--max-expression-complexity",
-        "7",
-        "--max-cognitive-complexity",
-        "8",
-    ],
-    "python.formatting.provider": "black",
     "[python]": {
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
@@ -54,11 +37,6 @@
     // for presentation mode
     "presentationMode.zoomLevel": 2,
     "zenMode.centerLayout": false,
-    // for marp
-    "markdown.marp.themes": [
-        "/Users/yuchi/Documents/presentation/mystyle.css"
-    ],
-    "hediet.vscode-drawio.local-storage": "eyIuZHJhd2lvLWNvbmZpZyI6IntcImxhbmd1YWdlXCI6XCJcIixcImN1c3RvbUZvbnRzXCI6W10sXCJsaWJyYXJpZXNcIjpcImdlbmVyYWxcIixcImN1c3RvbUxpYnJhcmllc1wiOltcIkwuc2NyYXRjaHBhZFwiXSxcInBsdWdpbnNcIjpbXSxcInJlY2VudENvbG9yc1wiOltcIjMzMzMzM1wiLFwiRkZCNTcwXCJdLFwiZm9ybWF0V2lkdGhcIjoyNDAsXCJjcmVhdGVUYXJnZXRcIjpmYWxzZSxcInBhZ2VGb3JtYXRcIjp7XCJ4XCI6MCxcInlcIjowLFwid2lkdGhcIjo4NTAsXCJoZWlnaHRcIjoxMTAwfSxcInNlYXJjaFwiOnRydWUsXCJzaG93U3RhcnRTY3JlZW5cIjp0cnVlLFwiZ3JpZENvbG9yXCI6XCIjZDBkMGQwXCIsXCJkYXJrR3JpZENvbG9yXCI6XCIjNmU2ZTZlXCIsXCJhdXRvc2F2ZVwiOnRydWUsXCJyZXNpemVJbWFnZXNcIjpudWxsLFwib3BlbkNvdW50ZXJcIjowLFwidmVyc2lvblwiOjE4LFwidW5pdFwiOjEsXCJpc1J1bGVyT25cIjpmYWxzZSxcInVpXCI6XCJcIn0ifQ==",
     "hediet.vscode-drawio.offline": false,
     "todo-tree.highlights.customHighlight": {
         "TODO": {
@@ -121,7 +99,6 @@
     },
     // カギ括弧をカラー表示
     "editor.guides.bracketPairs": true,
-    "editor.bracketPairColorization.enabled": true,
     "editor.accessibilitySupport": "off",
     "cSpell.userWords": [
         "argsort",
@@ -137,9 +114,7 @@
         "rcnn",
         "unsqueeze"
     ],
-    "sourcery.token": "",
     "terminal.integrated.enableMultiLinePasteWarning": false,
-    "sync.gist": "876bc7ec9b8f8668fc98450d2c4e6e9b",
     "[dockerfile]": {
         "editor.defaultFormatter": "ms-azuretools.vscode-docker"
     },

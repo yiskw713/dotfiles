@@ -17,8 +17,6 @@ set nowritebackup
 set nobackup
 " 挿入モードでバックスペースで削除できるようにする
 set backspace=indent,eol,start
-" 全角文字専用の設定
-set ambiwidth=double
 " wildmenuオプションを有効(vimバーからファイルを選択できる)
 set wildmenu
 " スワップファイルを作らない
@@ -31,10 +29,8 @@ set hidden
 set showcmd
 " 検索にマッチした行以外を折りたたむ(フォールドする)機能
 set nofoldenable
-" yでコピーした時にクリップボードに入る
-set guioptions+=a
 " ヤンクでクリップボードにコピー
-set clipboard=unnamed,autoselect
+set clipboard=unnamed
 
 "----------------------------------------
 " 表示
@@ -76,12 +72,8 @@ syntax enable
 set matchtime=1
 " コマンドラインの履歴を10000件保存する
 set history=10000
-" メニューバーを非表示にする
-set guioptions-=m
 " タイトルを表示
 set title
-" ツールバーを非表示にする
-set guioptions-=T
 
 "----------------------------------------
 " Tab系
@@ -113,7 +105,8 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 " 編集箇所のカーソルを記憶
 if has("autocmd")
-  augroup redhat
+  augroup vimrc
+    autocmd!
     " In text files, always limit the width of text to 78 characters
     autocmd BufRead *.txt set tw=78
     " When editing a file, always jump to the last cursor position
