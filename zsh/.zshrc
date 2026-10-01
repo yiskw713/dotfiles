@@ -92,7 +92,6 @@ alias dnet="docker network"
 # git
 alias gcm='git commit -m'
 alias g="git"
-alias go="git open"
 alias push='git push origin'
 alias pull='git pull origin'
 alias stash='git stash'
@@ -110,9 +109,6 @@ autoload -Uz _zinit
 
 # starship
 eval "$(starship init zsh)"
-
-# starshipでpyenvの環境が重複してしまうのを解消する
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1 
 
 zinit load "mafredri/zsh-async"
 zinit load "chrissicool/zsh-256color"
@@ -247,13 +243,11 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include"
 export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
 
 # ------------------
-# anyenv
+# mise
 # ------------------
-eval "$(anyenv init -)"
-for D in `ls $HOME/.anyenv/envs`
-do
-    export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
-done
+if (( $+commands[mise] )); then
+  eval "$(mise activate zsh)"
+fi
 
 # for claude code
 export PATH="$HOME/.local/bin:$PATH"
@@ -263,9 +257,6 @@ export PATH="$HOME/.local/bin:$PATH"
 # ------------------
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
-
-# pyenv
-eval "$(pyenv virtualenv-init -)"
 
 # https://github.com/nvbn/thefuck
 eval $(thefuck --alias)
@@ -286,6 +277,3 @@ docker() {
      /usr/local/bin/docker "$@"
   fi
 }
-
-# for poetry
-export PATH="//Users/yuchi/Library/Preferences/pypoetry/bin:$PATH"
