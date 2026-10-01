@@ -18,4 +18,4 @@ Each tool has its own directory; `install_procedure.sh` symlinks them into place
 
 ## Font
 
-use `"Roboto Mono for Powerline"` for terminal and vscode.
+Terminal (Alacritty) and VS Code use `"HackGen35 Console NF"`, installed via the `font-hackgen-nerd` cask in the `Brewfile` (`brew bundle`).

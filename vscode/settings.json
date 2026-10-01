@@ -90,7 +90,7 @@
     ],
     "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
     "footsteps.doHighlightChanges": false,
-    "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace, \"Roboto Mono for Powerline\", \"HackGen35 Console NF\"",
+    "editor.fontFamily": "\"HackGen35 Console NF\", Menlo, Monaco, 'Courier New', monospace",
     "editor.ruler": [
         88
     ],
