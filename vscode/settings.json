@@ -26,14 +26,10 @@
     // editor.wordSeparators: 単語単位での移動を行う場合の区切り文字を指定
     // 日本語文書で単語移動を使うため、助詞や読点、括弧を区切り文字として指定する
     "editor.wordSeparators": "./\\()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?　、。「」【】『』（）！？てにをはがのともへでや",
-    "git.ignoreLegacyWarning": true,
     "editor.acceptSuggestionOnCommitCharacter": false,
     "editor.acceptSuggestionOnEnter": "off",
-    // tabnenine
-    "tabnine.experimentalAutoImports": true,
     // liveserver
     "liveServer.settings.donotVerifyTags": true,
-    "launch": {},
     // for presentation mode
     "presentationMode.zoomLevel": 2,
     "zenMode.centerLayout": false,
@@ -76,14 +72,13 @@
         "editor.lineHighlightBackground": "#272626",
         "editorRuler.foreground": "#ff4081"
     },
-    "python.defaultInterpreterPath": "/usr/bin/python3",
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
     },
     // rust
     "[rust]": {
-        "editor.defaultFormatter": "rust-lang.rust",
+        "editor.defaultFormatter": "rust-lang.rust-analyzer",
         "editor.formatOnSave": true,
         "editor.tabSize": 4,
         "editor.insertSpaces": true,
@@ -94,26 +89,9 @@
     "zenMode.hideLineNumbers": false,
     // 行数を相対表示
     "editor.lineNumbers": "relative",
-    "terminal.integrated.env.osx": {
-        "FIG_NEW_SESSION": "1"
-    },
     // カギ括弧をカラー表示
     "editor.guides.bracketPairs": true,
     "editor.accessibilitySupport": "off",
-    "cSpell.userWords": [
-        "argsort",
-        "cname",
-        "cuda",
-        "Detic",
-        "dtype",
-        "fromarray",
-        "lvis",
-        "ndarray",
-        "openimages",
-        "pretrained",
-        "rcnn",
-        "unsqueeze"
-    ],
     "terminal.integrated.enableMultiLinePasteWarning": false,
     "[dockerfile]": {
         "editor.defaultFormatter": "ms-azuretools.vscode-docker"
@@ -122,7 +100,6 @@
     "rust-analyzer.checkOnSave.command": "clippy",
     "explorer.confirmDelete": false,
     "window.zoomLevel": -1,
-    "cSpell.languageSettings": [],
     "editor.inlineSuggest.enabled": true,
     "editor.formatOnSave": true,
     "yaml.disableSchemaDetection": [

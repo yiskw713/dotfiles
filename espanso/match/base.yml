@@ -26,9 +26,6 @@ matches:
           format: "【%Y.%m.%d】"
 
   # custom snippet
-  - trigger: ":otu"
-    replace: "お疲れ様です。石川です。"
-
   - trigger: ":ote"
     replace: "お手数おかけしますが、よろしくお願いいたします。"
 

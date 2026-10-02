@@ -248,33 +248,6 @@ url_api = "https://api.github.com/repos/dduan/tre/releases/assets/68962159"
 url = "https://github.com/dduan/tre/releases/download/v0.4.0/tre-v0.4.0-x86_64-pc-windows-msvc.zip"
 url_api = "https://api.github.com/repos/dduan/tre/releases/assets/68962218"
 
-[[tools."aqua:docker/cli"]]
-version = "29.8.2"
-backend = "aqua:docker/cli"
-specifiers = ["latest"]
-
-[tools."aqua:docker/cli"."platforms.linux-arm64"]
-url = "https://download.docker.com/linux/static/stable/aarch64/docker-29.8.2.tgz"
-
-[tools."aqua:docker/cli"."platforms.linux-arm64-musl"]
-url = "https://download.docker.com/linux/static/stable/aarch64/docker-29.8.2.tgz"
-
-[tools."aqua:docker/cli"."platforms.linux-x64"]
-url = "https://download.docker.com/linux/static/stable/x86_64/docker-29.8.2.tgz"
-
-[tools."aqua:docker/cli"."platforms.linux-x64-musl"]
-url = "https://download.docker.com/linux/static/stable/x86_64/docker-29.8.2.tgz"
-
-[tools."aqua:docker/cli"."platforms.macos-arm64"]
-checksum = "blake3:0a6e98de62d113b046f264cbca213b562801fb87ca21e1cdf842e903665c9299"
-url = "https://download.docker.com/mac/static/stable/aarch64/docker-29.8.2.tgz"
-
-[tools."aqua:docker/cli"."platforms.macos-x64"]
-url = "https://download.docker.com/mac/static/stable/x86_64/docker-29.8.2.tgz"
-
-[tools."aqua:docker/cli"."platforms.windows-x64"]
-url = "https://download.docker.com/win/static/stable/x86_64/docker-29.8.2.zip"
-
 [[tools."aqua:hadolint/hadolint"]]
 version = "2.15.1"
 backend = "aqua:hadolint/hadolint"

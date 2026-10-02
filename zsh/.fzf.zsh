@@ -54,8 +54,7 @@ flog() {
 # https://qiita.com/kamykn/items/aa9920f07487559c0c7e
 fcd() {
   local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
+  dir=$(fd --type d . "${1:-.}" 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
 
@@ -64,17 +63,16 @@ fcd() {
 fadd() {
   local out q n addfiles
   while out=$(
-      git status --short |
-      awk '{if (substr($0,2,1) !~ / /) print $2}' |
+      git -c core.quotepath=false ls-files -m -o --exclude-standard |
       fzf --multi --exit-0 --expect=ctrl-d); do
     q=$(head -1 <<< "$out")
     n=$(( $(wc -l <<< "$out") - 1 ))
-    addfiles=(`echo $(tail "-$n" <<< "$out")`)
-    [[ -z "$addfiles" ]] && continue
+    addfiles=("${(@f)$(tail -n "$n" <<< "$out")}")
+    [[ -z "${addfiles[*]}" ]] && continue
     if [ "$q" = ctrl-d ]; then
-      git diff --color=always $addfiles | less -R
+      git diff --color=always -- "${addfiles[@]}" | less -R
     else
-      git add $addfiles
+      git add -- "${addfiles[@]}"
     fi
   done
 }
@@ -87,21 +85,9 @@ fvim() {
          rg --files --hidden --follow --glob "!**/.git/*" | fzf \
              --preview 'bat  --color=always --style=header,grid {}' --preview-window=right:60%
      )
-  vi "$file"
+  [ -n "$file" ] && vi "$file"
 }
 alias fv="fvim"
-
-# かつていたことのあるディレクトリに移動する
-# https://qiita.com/kamykn/items/aa9920f07487559c0c7e
-fzf-z-search() {
-  local res=$(z | sort -rn | cut -c 12- | fzf)
-  if [ -n "$res" ]; then
-      BUFFER+="cd $res"
-      zle accept-line
-  else
-      return 1
-  fi
-}
 
 # zoxide の対話選択 (zi) を Ctrl-z で呼ぶ。
 # zinit も `zi` alias を定義するので、zoxide の関数名 __zoxide_zi を直接使う
@@ -119,48 +105,48 @@ fkill() {
 
   if [ "x$pid" != "x" ]
   then
-    echo $pid | xargs kill -${1:-9}
+    echo $pid | xargs kill -${1:-15}
   fi
 }
 
-# fzfでdockerコンテナに入る
+# fzfでpodmanコンテナに入る
 # ref: https://momozo.tech/2021/03/10/fzf%E3%81%A7zsh%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB%E4%BD%9C%E6%A5%AD%E3%82%92%E5%8A%B9%E7%8E%87%E5%8C%96/
 fdcnte() {
   local cid
-  cid=$(docker ps | sed 1d | fzf -q "$1" | awk '{print $1}')
-  [ -n "$cid" ] && docker exec -it "$cid" /bin/bash
+  cid=$(podman ps | sed 1d | fzf -q "$1" | awk '{print $1}')
+  [ -n "$cid" ] && podman exec -it "$cid" /bin/bash
 }
 
-# fzfでdockerのログを取得
+# fzfでpodmanのログを取得
 # ref: https://momozo.tech/2021/03/10/fzf%E3%81%A7zsh%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB%E4%BD%9C%E6%A5%AD%E3%82%92%E5%8A%B9%E7%8E%87%E5%8C%96/
 fdl() {
   local cid
-  cid=$(docker ps -a | sed 1d | fzf -q "$1" | awk '{print $1}')
-  [ -n "$cid" ] && docker logs -f --tail=200 "$cid"
+  cid=$(podman ps -a | sed 1d | fzf -q "$1" | awk '{print $1}')
+  [ -n "$cid" ] && podman logs -f --tail=200 "$cid"
 }
 
-# fzfでDockerコンテナ再起動
+# fzfでpodmanコンテナ再起動
 # ref: https://momozo.tech/2021/03/10/fzf%E3%81%A7zsh%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB%E4%BD%9C%E6%A5%AD%E3%82%92%E5%8A%B9%E7%8E%87%E5%8C%96/
 fdcntre() {
   local cid
-  cid=$(docker ps -a | sed 1d | fzf -m -q "$1" | awk '{print $1}')
-  [ -n "$cid" ] && echo $cid | xargs docker container restart
+  cid=$(podman ps -a | sed 1d | fzf -m -q "$1" | awk '{print $1}')
+  [ -n "$cid" ] && echo $cid | xargs podman container restart
 }
 
-# docker container rm
+# podman container rm
 # ref: https://momozo.tech/2021/03/10/fzf%E3%81%A7zsh%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB%E4%BD%9C%E6%A5%AD%E3%82%92%E5%8A%B9%E7%8E%87%E5%8C%96/
 fdcntrm() {
   local cid
-  cid=$(docker ps -a | sed 1d | fzf -m -q "$1" | awk '{print $1}')
-  [ -n "$cid" ] && echo $cid | xargs docker container rm -f
+  cid=$(podman ps -a | sed 1d | fzf -m -q "$1" | awk '{print $1}')
+  [ -n "$cid" ] && echo $cid | xargs podman container rm -f
 }
 
-# docker image rm
+# podman image rm
 fdimgrm() {
   local cid
   # IMAGE ID は3列目 (1列目はリポジトリ名で、<none> や複数タグで誤削除になる)。同じ ID は1つにまとめる
-  cid=$(docker image ls -a | sed 1d | fzf -m -q "$1" | awk '{print $3}' | sort -u)
-  [ -n "$cid" ] && echo $cid | xargs docker image rm -f
+  cid=$(podman image ls -a | sed 1d | fzf -m -q "$1" | awk '{print $3}' | sort -u)
+  [ -n "$cid" ] && echo $cid | xargs podman image rm -f
 }
 
 # ghq with fzf

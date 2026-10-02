@@ -6,11 +6,12 @@
     defaultBranch = main
 
 [core]
-    pager = delta
+    # delta が無い環境 (mise install 前など) では less にフォールバックする
+    pager = "if command -v delta >/dev/null 2>&1; then delta; else less; fi"
     editor = vim
 
 [interactive]
-    diffFilter = delta --color-only
+    diffFilter = "if command -v delta >/dev/null 2>&1; then delta --color-only; else cat; fi"
 
 [delta]
     navigate = true

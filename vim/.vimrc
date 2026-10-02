@@ -2,7 +2,8 @@ call plug#begin()
 Plug 'tomasiser/vim-code-dark'
 Plug 'lambdalisue/fern.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" fzf バイナリは mise 管理のものを使うので fzf#install は呼ばない
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 call plug#end()
 

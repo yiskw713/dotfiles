@@ -79,17 +79,14 @@ alias vz="vim ~/.zshrc"
 alias vv="vim ~/.vimrc"
 alias sz="source ~/.zshrc"
 alias screensaver="pipes.sh -p 5 -t 0 -r 5000"
-# docker
-alias d='docker'
-alias dc='docker-compose'
-alias dimg='docker image'
-alias dcnt='docker container'
-alias dnet="docker network"
+# container (podman)
+alias d='podman'
+alias dimg='podman image'
+alias dcnt='podman container'
+alias dnet="podman network"
 # git
 alias gcm='git commit -m'
 alias g="git"
-alias push='git push origin'
-alias pull='git pull origin'
 alias stash='git stash'
 # rust
 alias c="cargo"
@@ -108,7 +105,6 @@ add-zsh-hook preexec show_alias_expansion
 # ------------------
 source ~/.zinit/bin/zinit.zsh
 autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
 
 # starship
 eval "$(starship init zsh)"
@@ -153,9 +149,16 @@ bindkey -M menuselect '^k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect '^l' vi-forward-char
 
-# for docker completion etc.
+# for podman completion etc.
 fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit && compinit -C
+autoload -Uz compinit
+# .zcompdump が24時間以内なら -C でチェックを省略して高速化し、古ければ作り直す
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
 # 補完方法毎にグループ化する。
 zstyle ':completion:*' format '%B%F{blue}%d%f%b'
@@ -189,7 +192,7 @@ setopt auto_menu
 setopt auto_cd
 # ^D でシェルを終了しない
 setopt ignore_eof
-# 補完時にヒストリを自動的に展開する
+# ! によるヒストリ展開 (!!, !$ など) を有効にする
 setopt hist_expand
 # 補完候補一覧でファイルの種別を識別マーク表示
 setopt list_types
@@ -212,6 +215,8 @@ setopt hist_ignore_dups
 setopt share_history
 # ヒストリにhistoryコマンドを記録しない
 setopt hist_no_store
+# 先頭にスペースを付けたコマンドはヒストリに残さない
+setopt hist_ignore_space
 # ビープを無効にする
 setopt no_beep
 setopt no_hist_beep

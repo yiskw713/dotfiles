@@ -6,13 +6,6 @@ error_symbol = "[✗](bold red)"
 # Apple アイコンは表示できないので Nerd Font の別アイコンを使う
 success_symbol = "[](bold purple)"
 
-[aws] # display everything
-format = 'on [$symbol($profile )(\($region\) )]($style)'
-style = "bold blue"
-[aws.region_aliases]
-ap-southeast-2 = "au"
-us-east-1 = "va"
-
 [cmd_duration]
 format = "[$duration]($style) " 
 min_time = 1_000 # millisecond
@@ -29,13 +22,3 @@ format = "via [🐋 $context](blue bold)"
 
 [python]
 pyenv_version_name = false
-
-[rust]
-disabled = false
-
-[username]
-disabled = true
-format = "[$user]($style) "
-show_always = true
-style_root = "black bold"
-style_user = "white bold"

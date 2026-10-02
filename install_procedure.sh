@@ -7,6 +7,12 @@ set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
+# macOS only: Homebrew / mise bootstrap and `defaults` below assume Darwin
+if [ "$(uname)" != Darwin ]; then
+  echo "This script supports macOS only." >&2
+  exit 1
+fi
+
 # Symlink $1 to $2. A real file/dir already at $2 is moved aside to $2.bak.<timestamp>.
 link() {
   if [ -e "$2" ] && [ ! -L "$2" ]; then
@@ -21,7 +27,7 @@ link() {
 # 1. Symlinks
 # ------------------------------------------------------------
 echo "Creating symlinks..."
-mkdir -p ~/.config/{mise,procs,alacritty,herdr}
+mkdir -p ~/.config/{mise,procs,alacritty,herdr,git}
 
 link "$DOTFILES_DIR/zsh/.zshrc"          ~/.zshrc
 link "$DOTFILES_DIR/zsh/.fzf.zsh"        ~/.fzf.zsh
@@ -31,6 +37,7 @@ link "$DOTFILES_DIR/herdr/status.sh"     ~/.config/herdr/status.sh
 link "$DOTFILES_DIR/herdr/name-pane.sh"   ~/.config/herdr/name-pane.sh
 link "$DOTFILES_DIR/vim/.vimrc"          ~/.vimrc
 link "$DOTFILES_DIR/git/.gitconfig"      ~/.gitconfig
+link "$DOTFILES_DIR/git/ignore"          ~/.config/git/ignore
 link "$DOTFILES_DIR/starship/starship.toml" ~/.config/starship.toml
 link "$DOTFILES_DIR/procs/config.toml"   ~/.config/procs/config.toml
 link "$DOTFILES_DIR/alacritty/alacritty.toml" ~/.config/alacritty/alacritty.toml
@@ -43,11 +50,20 @@ link "$DOTFILES_DIR/mise/mise.lock"      ~/.config/mise/mise.lock
 if [ "$(uname)" = Darwin ]; then
   echo "Configuring macOS defaults..."
   mkdir -p ~/Pictures/ScreenShots
+  read_defaults() {
+    defaults read com.apple.screencapture location 2>/dev/null
+    defaults read com.apple.finder AppleShowAllFiles 2>/dev/null
+    defaults read com.apple.desktopservices DSDontWriteNetworkStores 2>/dev/null
+  }
+  defaults_before="$(read_defaults || true)"
   defaults write com.apple.screencapture location ~/Pictures/ScreenShots
   chflags nohidden ~/
   defaults write com.apple.finder AppleShowAllFiles TRUE
   defaults write com.apple.desktopservices DSDontWriteNetworkStores true
-  killall Finder SystemUIServer &>/dev/null || true
+  # only restart Finder / SystemUIServer when a value actually changed
+  if [ "$defaults_before" != "$(read_defaults || true)" ]; then
+    killall Finder SystemUIServer &>/dev/null || true
+  fi
 
   xcode-select -p &>/dev/null || xcode-select --install
 
@@ -82,8 +98,9 @@ echo "Setting up mise..."
 eval "$(mise activate bash --shims)"
 mise install --yes
 
-# unmaintained repo (no go.mod): mise go backend cannot build it, use go install directly
-mise exec go -- go install github.com/motemen/github-list-starred@master
+# unmaintained repo (no go.mod): mise go backend cannot build it, use go install directly.
+# Pinned to a commit (no releases) so installs are reproducible.
+mise exec go -- go install github.com/motemen/github-list-starred@91affcda6f452e800e52c99cc20d66ebbe3d29bf
 
 # ------------------------------------------------------------
 # 5. zsh / tmux / vim plugins
@@ -97,6 +114,7 @@ mkdir -p ~/.zsh/completion
 # vim-plug (plugins are declared in vim/.vimrc)
 [ -f ~/.vim/autoload/plug.vim ] || curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# `vim -es` exits 1 even when PlugInstall succeeds, so the exit status is ignored
 vim -es -u ~/.vimrc +PlugInstall +qall || true
 
 echo "Done. Restart your shell."
