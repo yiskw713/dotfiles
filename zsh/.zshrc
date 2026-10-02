@@ -153,11 +153,14 @@ bindkey -M menuselect '^l' vi-forward-char
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit
 # .zcompdump が24時間以内なら -C でチェックを省略して高速化し、古ければ作り直す
-if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-  compinit
-else
-  compinit -C
-fi
+() {
+  local -a stale=(~/.zcompdump(N.mh+24))
+  if (( $#stale )) || [[ ! -e ~/.zcompdump ]]; then
+    compinit
+  else
+    compinit -C
+  fi
+}
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 # 補完方法毎にグループ化する。
