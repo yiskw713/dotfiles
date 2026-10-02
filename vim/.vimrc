@@ -138,3 +138,17 @@ endif
 
 " 行の表示を相対的な表示にする
 set relativenumber
+
+" herdr の prefix+v (edit_scrollback) で開く一時ファイル:
+" 末尾 (最新) の行から表示する
+augroup herdr_scrollback
+  autocmd!
+  autocmd BufReadPost */herdr-scrollback-* normal! G
+augroup END
+
+" herdr の prefix+v (edit_scrollback) で開く一時ファイル:
+" Markdown としてハイライトし、末尾 (最新) の行から表示する
+augroup herdr_scrollback
+  autocmd!
+  autocmd BufReadPost */herdr-scrollback-* setlocal filetype=markdown | normal! G
+augroup END
