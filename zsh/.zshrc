@@ -6,6 +6,14 @@ if [ -x /opt/homebrew/bin/brew ]; then
 fi
 
 # ------------------
+# mise
+# ------------------
+# zoxide / eza / starship など mise 管理のツールを後続で使うので、最初に有効化する
+if (( $+commands[mise] )); then
+  eval "$(mise activate zsh)"
+fi
+
+# ------------------
 # locale setting
 # ------------------
 export LANG="en_US.UTF-8"
@@ -208,13 +216,6 @@ setopt hist_no_store
 setopt no_beep
 setopt no_hist_beep
 setopt no_list_beep
-
-# ------------------
-# mise
-# ------------------
-if (( $+commands[mise] )); then
-  eval "$(mise activate zsh)"
-fi
 
 # for claude code
 export PATH="$HOME/.local/bin:$PATH"

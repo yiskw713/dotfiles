@@ -158,7 +158,8 @@ fdcntrm() {
 # docker image rm
 fdimgrm() {
   local cid
-  cid=$(docker image ls -a | sed 1d | fzf -m -q "$1" | awk '{print $1}')
+  # IMAGE ID は3列目 (1列目はリポジトリ名で、<none> や複数タグで誤削除になる)。同じ ID は1つにまとめる
+  cid=$(docker image ls -a | sed 1d | fzf -m -q "$1" | awk '{print $3}' | sort -u)
   [ -n "$cid" ] && echo $cid | xargs docker image rm -f
 }
 

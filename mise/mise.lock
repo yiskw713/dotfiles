@@ -236,6 +236,7 @@ url = "https://github.com/dduan/tre/releases/download/v0.4.0/tre-v0.4.0-x86_64-u
 url_api = "https://api.github.com/repos/dduan/tre/releases/assets/68962181"
 
 [tools."aqua:dduan/tre"."platforms.macos-arm64"]
+checksum = "blake3:f7e11ac29badc9ba45f86157882b124858740bf9b977af5c4bc450defcc2c7d3"
 url = "https://github.com/dduan/tre/releases/download/v0.4.0/tre-v0.4.0-aarch64-apple-darwin.tar.gz"
 url_api = "https://api.github.com/repos/dduan/tre/releases/assets/68962258"
 
@@ -265,6 +266,7 @@ url = "https://download.docker.com/linux/static/stable/x86_64/docker-29.8.2.tgz"
 url = "https://download.docker.com/linux/static/stable/x86_64/docker-29.8.2.tgz"
 
 [tools."aqua:docker/cli"."platforms.macos-arm64"]
+checksum = "blake3:0a6e98de62d113b046f264cbca213b562801fb87ca21e1cdf842e903665c9299"
 url = "https://download.docker.com/mac/static/stable/aarch64/docker-29.8.2.tgz"
 
 [tools."aqua:docker/cli"."platforms.macos-x64"]
@@ -947,16 +949,6 @@ checksum = "sha256:3135ca568023e31e678a489d1e48fa99bbe8261ff13b0a51553e44250a862
 url = "https://github.com/zquestz/s/releases/download/v0.8.1/s-windows_amd64.zip"
 url_api = "https://api.github.com/repos/zquestz/s/releases/assets/490949252"
 
-[[tools."github:AlDanial/cloc"]]
-version = "2.10"
-backend = "github:AlDanial/cloc"
-specifiers = ["latest"]
-
-[tools."github:AlDanial/cloc"."platforms.windows-x64"]
-checksum = "sha256:97786c4b5bb71d2be67e42061a2f5d03db73bbf88228f8710001d770e867bbef"
-url = "https://github.com/AlDanial/cloc/releases/download/v2.10/cloc-2.10.exe"
-url_api = "https://api.github.com/repos/AlDanial/cloc/releases/assets/466555271"
-
 [[tools."github:yt-dlp/yt-dlp"]]
 version = "2026.08.19"
 backend = "github:yt-dlp/yt-dlp"
@@ -1205,6 +1197,15 @@ version = "4.0.7"
 backend = "core:ruby"
 specifiers = ["latest"]
 
+[tools.ruby."platforms.windows-x64"]
+checksum = "sha256:7a9be96d3448ecbd9a81eccae1f619131dfcc761f2c98dded03ece6c05d0474f"
+url = "https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-4.0.7-1/rubyinstaller-4.0.7-1-x64.7z"
+
+[[tools.ruby]]
+version = "4.0.7"
+backend = "core:ruby"
+specifiers = ["latest"]
+
 [tools.ruby.options]
 compile = "false"
 precompiled_url = "jdx/ruby"
@@ -1237,15 +1238,6 @@ provenance = "github-attestations"
 [tools.ruby."platforms.macos-x64"]
 checksum = "sha256:911ace20f90d068ca0e4dda6d0e4f0f81e52e52f2dd4f4004c721e253412e82d"
 url = "https://cache.ruby-lang.org/pub/ruby/4.0/ruby-4.0.7.tar.gz"
-
-[[tools.ruby]]
-version = "4.0.7"
-backend = "core:ruby"
-specifiers = ["latest"]
-
-[tools.ruby."platforms.windows-x64"]
-checksum = "sha256:7a9be96d3448ecbd9a81eccae1f619131dfcc761f2c98dded03ece6c05d0474f"
-url = "https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-4.0.7-1/rubyinstaller-4.0.7-1-x64.7z"
 
 [[tools.uv]]
 version = "0.12.21"
