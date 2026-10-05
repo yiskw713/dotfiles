@@ -34,6 +34,7 @@ minikube = "latest"
 "aqua:starship/starship" = "latest"
 "aqua:tealdeer-rs/tealdeer" = "latest"
 "aqua:tmux/tmux-builds" = "latest"
+"github:microsoft/apm" = "latest"
 "github:yt-dlp/yt-dlp" = "latest"
 "aqua:ajeetdsouza/zoxide" = "latest"
 
