@@ -116,10 +116,11 @@ pane_outer_borders = true
 [ui.sidebar.agents]
 # 状態アイコンに加えて状態名のテキスト (working など) も表示する
 # pane = prefix+shift+p で付けたペイン名、terminal_title_stripped = エージェントの作業内容
-rows = [["state_icon", "state_text", "machine", "workspace"], ["tab", "pane"], ["terminal_title_stripped"], ["agent"]]
+rows = [["state_icon", "state_text", "machine"], ["workspace"], ["tab", "pane"], ["terminal_title_stripped"], ["agent"]]
 
 [ui.sidebar.spaces]
-rows = [["state_icon", "state_text", "workspace"], ["branch", "git_status"]]
+row_gap = 1
+rows = [["state_icon", "state_text", "workspace"], ["branch"], ["git_status"]]
 
 [ui.toast]
 # 別ワークスペースでの動き/完了通知 (tmux: monitor-activity / visual-activity)
