@@ -125,3 +125,16 @@ rows = [["state_icon", "state_text", "workspace"], ["branch", "git_status"]]
 # 別ワークスペースでの動き/完了通知 (tmux: monitor-activity / visual-activity)
 # terminal = 外側の端末の通知 (SSH 越しでも届く)。音は ui.sound (既定で有効) で鳴る
 delivery = "terminal"
+
+[experimental]
+# prefix モード中だけ ASCII 入力ソース (英字) に切り替え、抜けたら元の入力ソースに戻す。
+# 日本語 IME のまま prefix+h などを押しても取りこぼさないようにするため。
+switch_ascii_input_source_in_prefix = true
+
+# 自前でカーソルを描く TUI でも、外側の端末にカーソル位置を伝えて
+# IME の変換候補ウィンドウを追従させる。
+reveal_hidden_cursor_for_cjk_ime = true
+# 上の設定を効かせるペインを限定する (空 = 全ペイン)。
+# vim の normal モードのようにカーソルを消すアプリで二重に見えるのを避けるため、
+# エージェントのペインだけに絞る。
+cjk_ime_agents = ["claude"]
