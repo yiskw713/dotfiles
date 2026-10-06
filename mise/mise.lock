@@ -202,6 +202,11 @@ checksum = "sha256:0bfce159a5cddd5feb3d6db4a616d883ff51253ce08ac7ec11cb1d208cfaa
 url = "https://github.com/dandavison/delta/releases/download/0.19.2/delta-0.19.2-aarch64-unknown-linux-gnu.tar.gz"
 url_api = "https://api.github.com/repos/dandavison/delta/releases/assets/383662337"
 
+[tools."aqua:dandavison/delta"."platforms.linux-arm64-musl"]
+checksum = "sha256:0bfce159a5cddd5feb3d6db4a616d883ff51253ce08ac7ec11cb1d208cfaab9e"
+url = "https://github.com/dandavison/delta/releases/download/0.19.2/delta-0.19.2-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/dandavison/delta/releases/assets/383662337"
+
 [tools."aqua:dandavison/delta"."platforms.linux-x64"]
 checksum = "sha256:8e695c5f586a8c53d6c3b01be0b4a422ed218bfed2a56191caebe373a1c18ab2"
 url = "https://github.com/dandavison/delta/releases/download/0.19.2/delta-0.19.2-x86_64-unknown-linux-gnu.tar.gz"
@@ -567,6 +572,11 @@ checksum = "sha256:2cd875ab6c78b27e4830b5bca92c570a8a8dcfb368bc71b189b65ac01fbc3
 url = "https://github.com/phiresky/ripgrep-all/releases/download/v0.10.10/ripgrep_all-v0.10.10-aarch64-unknown-linux-gnu.tar.gz"
 url_api = "https://api.github.com/repos/phiresky/ripgrep-all/releases/assets/314433031"
 
+[tools."aqua:phiresky/ripgrep-all"."platforms.linux-arm64-musl"]
+checksum = "sha256:2cd875ab6c78b27e4830b5bca92c570a8a8dcfb368bc71b189b65ac01fbc3020"
+url = "https://github.com/phiresky/ripgrep-all/releases/download/v0.10.10/ripgrep_all-v0.10.10-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/phiresky/ripgrep-all/releases/assets/314433031"
+
 [tools."aqua:phiresky/ripgrep-all"."platforms.linux-x64"]
 checksum = "sha256:a969c25b182ac84aa672518313b5f741091decf7d93d03a020bcfe517b9ff4e8"
 url = "https://github.com/phiresky/ripgrep-all/releases/download/v0.10.10/ripgrep_all-v0.10.10-x86_64-unknown-linux-musl.tar.gz"
@@ -793,6 +803,11 @@ backend = "aqua:theryangeary/choose"
 specifiers = ["latest"]
 
 [tools."aqua:theryangeary/choose"."platforms.linux-arm64"]
+checksum = "sha256:0db1d789ededcedd2c56222eb28f45d5e5e1c56717c0ba5d26c780696bbe3420"
+url = "https://github.com/theryangeary/choose/releases/download/v1.3.7/choose-aarch64-unknown-linux-gnu"
+url_api = "https://api.github.com/repos/theryangeary/choose/releases/assets/286227042"
+
+[tools."aqua:theryangeary/choose"."platforms.linux-arm64-musl"]
 checksum = "sha256:0db1d789ededcedd2c56222eb28f45d5e5e1c56717c0ba5d26c780696bbe3420"
 url = "https://github.com/theryangeary/choose/releases/download/v1.3.7/choose-aarch64-unknown-linux-gnu"
 url_api = "https://api.github.com/repos/theryangeary/choose/releases/assets/286227042"
