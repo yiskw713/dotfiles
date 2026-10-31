@@ -937,6 +937,46 @@ checksum = "sha256:3135ca568023e31e678a489d1e48fa99bbe8261ff13b0a51553e44250a862
 url = "https://github.com/zquestz/s/releases/download/v0.8.1/s-windows_amd64.zip"
 url_api = "https://api.github.com/repos/zquestz/s/releases/assets/490949252"
 
+[[tools."github:laishulu/macism"]]
+version = "4.0.0"
+backend = "github:laishulu/macism"
+specifiers = ["latest"]
+
+[tools."github:laishulu/macism"."platforms.linux-arm64"]
+checksum = "sha256:36f367a206ce475840afed51fba0f9d286871cbb88cd2299f21801776bbf788b"
+url = "https://github.com/laishulu/macism/releases/download/v4.0.0/macism-arm64"
+url_api = "https://api.github.com/repos/laishulu/macism/releases/assets/664222781"
+
+[tools."github:laishulu/macism"."platforms.linux-arm64-musl"]
+checksum = "sha256:36f367a206ce475840afed51fba0f9d286871cbb88cd2299f21801776bbf788b"
+url = "https://github.com/laishulu/macism/releases/download/v4.0.0/macism-arm64"
+url_api = "https://api.github.com/repos/laishulu/macism/releases/assets/664222781"
+
+[tools."github:laishulu/macism"."platforms.linux-x64"]
+checksum = "sha256:b3a7dabc4ba49a51beab999d9ee8cc10bdeb3e0c5978a9cf917dd15a8e9147b5"
+url = "https://github.com/laishulu/macism/releases/download/v4.0.0/macism-x86_64"
+url_api = "https://api.github.com/repos/laishulu/macism/releases/assets/664222783"
+
+[tools."github:laishulu/macism"."platforms.linux-x64-musl"]
+checksum = "sha256:b3a7dabc4ba49a51beab999d9ee8cc10bdeb3e0c5978a9cf917dd15a8e9147b5"
+url = "https://github.com/laishulu/macism/releases/download/v4.0.0/macism-x86_64"
+url_api = "https://api.github.com/repos/laishulu/macism/releases/assets/664222783"
+
+[tools."github:laishulu/macism"."platforms.macos-arm64"]
+checksum = "sha256:36f367a206ce475840afed51fba0f9d286871cbb88cd2299f21801776bbf788b"
+url = "https://github.com/laishulu/macism/releases/download/v4.0.0/macism-arm64"
+url_api = "https://api.github.com/repos/laishulu/macism/releases/assets/664222781"
+
+[tools."github:laishulu/macism"."platforms.macos-x64"]
+checksum = "sha256:b3a7dabc4ba49a51beab999d9ee8cc10bdeb3e0c5978a9cf917dd15a8e9147b5"
+url = "https://github.com/laishulu/macism/releases/download/v4.0.0/macism-x86_64"
+url_api = "https://api.github.com/repos/laishulu/macism/releases/assets/664222783"
+
+[tools."github:laishulu/macism"."platforms.windows-x64"]
+checksum = "sha256:b3a7dabc4ba49a51beab999d9ee8cc10bdeb3e0c5978a9cf917dd15a8e9147b5"
+url = "https://github.com/laishulu/macism/releases/download/v4.0.0/macism-x86_64"
+url_api = "https://api.github.com/repos/laishulu/macism/releases/assets/664222783"
+
 [[tools."github:microsoft/apm"]]
 version = "0.33.0"
 backend = "github:microsoft/apm"

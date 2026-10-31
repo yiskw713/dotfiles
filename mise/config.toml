@@ -37,6 +37,7 @@ minikube = "latest"
 "github:microsoft/apm" = "latest"
 "github:yt-dlp/yt-dlp" = "latest"
 "aqua:ajeetdsouza/zoxide" = "latest"
+"github:laishulu/macism" = "latest"
 
 [settings]
 lockfile = true

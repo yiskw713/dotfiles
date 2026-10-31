@@ -101,6 +101,9 @@ set incsearch
 set wrapscan
 " 検索語をハイライト表示
 set hlsearch
+" キーコードの待ち時間を短くして <Esc> で即座にノーマルモードに戻る
+set ttimeout
+set ttimeoutlen=10
 " ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
@@ -145,3 +148,11 @@ augroup herdr_scrollback
   autocmd!
   autocmd BufReadPost */herdr-scrollback-* normal! G
 augroup END
+
+" インサートモードを抜けたら IME を英数 (ABC) に戻す (macism は mise 管理)
+if executable('macism')
+  augroup ime_off
+    autocmd!
+    autocmd InsertLeave * call job_start(['macism', 'com.apple.keylayout.ABC'])
+  augroup END
+endif
