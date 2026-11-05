@@ -15,6 +15,8 @@ case "${1:-}" in
     ;;
   weather)
     # %l:+%c+%t (Tokyo, metric)。取得失敗時は何も出さない
-    curl -fsS --max-time 3 'https://wttr.in/Tokyo?format=%l:+%c+%t&m' 2>/dev/null
+    # wttr.in のアイコンには U+FE0F (異体字セレクタ) が付くが、手元のフォントだと
+    # 不可視文字として扱われず ")" のような余計なグリフが見えてしまうため除去する
+    curl -fsS --max-time 3 'https://wttr.in/Tokyo?format=%l:+%c+%t&m' 2>/dev/null | perl -CSD -pe 's/\x{FE0F}//g'
     ;;
 esac

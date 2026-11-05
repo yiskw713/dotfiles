@@ -113,14 +113,30 @@ pane_gaps = false
 # 外周の枠を表示する (サイドバーとの境界線にもなる)
 pane_outer_borders = true
 
+# サイドバーには workspace / tab / pane の名前がラベルなしで並ぶため、どれが何か
+# 分からなくなる。herdr にはリテラル文字列のトークンが無いので、色で区別する。
+# 階層が広い順に 紫 (workspace) → 青 (tab) → ティール (pane) のグラデーション。
+# 緑・黄・赤は state_icon/state_text と git_status が使うため避ける (accent も黄)。
+
 [ui.sidebar.agents]
 # 状態アイコンに加えて状態名のテキスト (working など) も表示する
 # pane = prefix+shift+p で付けたペイン名、terminal_title_stripped = エージェントの作業内容
-rows = [["state_icon", "state_text", "machine"], ["workspace"], ["tab", "pane"], ["terminal_title_stripped"], ["agent"]]
+# agent はどのペインも claude で情報量が無いので出さない
+rows = [
+  ["state_icon", "state_text", { token = "machine", fg = "#9399b2" }],
+  [{ token = "workspace", fg = "#cba6f7" }],
+  [{ token = "tab", fg = "#89b4fa" }, { token = "pane", fg = "#94e2d5" }],
+  ["terminal_title_stripped"],
+]
 
 [ui.sidebar.spaces]
-row_gap = 1
-rows = [["state_icon", "state_text", "workspace"], ["branch"], ["git_status"]]
+row_gap = 0
+# workspace は agents 欄と同じ紫にして、両パネルで同じ色 = 同じ概念と分かるようにする
+rows = [
+  ["state_icon", "state_text", { token = "workspace", fg = "#cba6f7" }],
+  [{ token = "branch", fg = "#9399b2" }],
+  ["git_status"],
+]
 
 [ui.toast]
 # 別ワークスペースでの動き/完了通知 (tmux: monitor-activity / visual-activity)

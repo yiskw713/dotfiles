@@ -102,6 +102,7 @@ mise install --yes
 # Pinned to a commit (no releases) so installs are reproducible.
 mise exec go -- go install github.com/motemen/github-list-starred@91affcda6f452e800e52c99cc20d66ebbe3d29bf
 
+
 # ------------------------------------------------------------
 # 5. zsh / tmux / vim plugins
 # ------------------------------------------------------------
