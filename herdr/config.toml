@@ -69,6 +69,15 @@ detach = ["prefix+q", "prefix+d"]
 # スクロールバック全体をエディタで開く (tmux: bind v)
 edit_scrollback = "prefix+v"
 
+# ズーム (tmux: bind z)。既定の prefix+z は外し、ペイン名に印も付ける zoom.sh に置き換える
+zoom = ""
+
+[[keys.command]]
+key = "prefix+z"
+type = "shell"
+command = "~/.config/herdr/zoom.sh"
+description = "toggle zoom (mark pane name)"
+
 # フローティングのシェル (tmux: bind f の display-popup)
 [[keys.command]]
 key = "prefix+f"
@@ -99,6 +108,9 @@ mouse_scroll_lines = 3
 # ステータスバーを上に表示 (tmux: status-position top)
 tab_bar_position = "top"
 tab_bar_right = [
+  # prefix+z でペインをズームしている間だけインジケータを出す (tmux の window_zoomed_flag 相当)
+  # タブ名に付く Z だけでは気付きにくいため。文言は ZOOM 固定で、背景は ui.accent の色になる
+  { type = "zoom" },
   { type = "command", command = "~/.config/herdr/status.sh cpu", interval_seconds = 5, timeout_seconds = 3 },
   { type = "command", command = "~/.config/herdr/status.sh ram", interval_seconds = 5, timeout_seconds = 3 },
   { type = "datetime", format = "[%Y-%m-%d(%a) %H:%M]" },
@@ -125,7 +137,8 @@ pane_outer_borders = true
 rows = [
   ["state_icon", "state_text", { token = "machine", fg = "#9399b2" }],
   [{ token = "workspace", fg = "#cba6f7" }],
-  [{ token = "tab", fg = "#89b4fa" }, { token = "pane", fg = "#94e2d5" }],
+  # zoom.sh がズーム中のペイン名に付ける虫眼鏡を目印に、ペイン名を赤の太字にする
+  [{ token = "tab", fg = "#89b4fa" }, { token = "pane", fg = "#94e2d5", rules = [{ contains = "🔍", fg = "#f38ba8", bold = true }] }],
   ["terminal_title_stripped"],
 ]
 

@@ -35,6 +35,7 @@ link "$DOTFILES_DIR/tmux/.tmux.conf"     ~/.tmux.conf
 link "$DOTFILES_DIR/herdr/config.toml"   ~/.config/herdr/config.toml
 link "$DOTFILES_DIR/herdr/status.sh"     ~/.config/herdr/status.sh
 link "$DOTFILES_DIR/herdr/name-pane.sh"   ~/.config/herdr/name-pane.sh
+link "$DOTFILES_DIR/herdr/zoom.sh"        ~/.config/herdr/zoom.sh
 link "$DOTFILES_DIR/vim/.vimrc"          ~/.vimrc
 link "$DOTFILES_DIR/git/.gitconfig"      ~/.gitconfig
 link "$DOTFILES_DIR/git/ignore"          ~/.config/git/ignore
