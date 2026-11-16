@@ -93,6 +93,12 @@ alias c="cargo"
 # python
 alias p="python"
 
+# Claude Code が実行するシェル (CLAUDECODE=1) では、標準コマンドを別ツールに置き換える alias を外す。
+# オプションや出力形式が違うため (ls -t が eza で失敗する等)、cd は z + eza で止まることもある
+if [[ -n "$CLAUDECODE" ]]; then
+    unalias cd ls ll ps du df tree 2>/dev/null
+fi
+
 # alias を使ったとき、実行前に展開後のコマンドを表示する
 autoload -Uz add-zsh-hook
 show_alias_expansion() {
